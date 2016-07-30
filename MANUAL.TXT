@@ -1,8 +1,3 @@
-# ndproxy
-
-kernel module for FreeBSD that implements IPv6 Neighbor Discovery proxying over Ethernet-like access networks
-
-````manpage
 NDPROXY(4)             FreeBSD Kernel Interfaces Manual             NDPROXY(4)
 
 NAME
@@ -296,4 +291,3 @@ AUTHOR
      Alexandre Fenyo <alex@fenyo.net> - www.fenyo.net
 
 FreeBSD 10.1                    March 30, 2015                    FreeBSD 10.1
-````
