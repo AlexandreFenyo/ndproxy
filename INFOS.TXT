@@ -30,4 +30,3 @@ sync with GitHub, as user:
   git add -A
   git commit -m new
   git push
-  git push --tags
