@@ -39,5 +39,3 @@ sync with GitHub, as user:
 removing installed manpage:
 rm -f /usr/share/man/man4/ndproxy.4.gz
 rm -f /usr/local/man/man4/ndproxy.4.gz
-
-
