@@ -3,3 +3,6 @@
 *.ko
 *.ko.*
 TAGS
+export_syms
+machine
+x86

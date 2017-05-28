@@ -28,6 +28,7 @@
 
 #include <sys/param.h>
 #include <sys/socket.h>
+#include <sys/kdb.h>
 #include <net/if.h>
 #include <net/if_var.h>
 #include <net/ethernet.h>
