@@ -2,7 +2,6 @@
 
 kernel module for FreeBSD that implements IPv6 Neighbor Discovery proxying over Ethernet-like access networks
 
-````manpage
 NDPROXY(4)             FreeBSD Kernel Interfaces Manual             NDPROXY(4)
 
 NAME
@@ -22,11 +21,6 @@ SYNOPSIS
      every IPv6 incoming packet, in order to specifically handle and filter
      neighbor solicitations and reply with appropriate neighbor advertise-
      ments.
-
-     To load the module at boot time, place the following line in
-     loader.conf(5):
-
-           ndproxy_load="YES"
 
      ND (Neighbor Discovery) packets are mainly targeted at solicited-node
      multicast addresses, but ndproxy has no information about the hosts to
@@ -238,25 +232,38 @@ UPLINK ROUTER ADDRESSES
      internal subscriber's subnets.
 
 CONFIGURATION
-     The sysctl utility is used to set ndproxy configuration parameters.
-
-     To load these parameters at boot time, place the corresponding entries in
-     sysctl.conf(5).
-
      An IPv6 address can be any valid textual representation according to
      RFC-4291 and RFC-5952 (this means that transitional textual representa-
      tion is fully supported).  Other representations will trigger an error
      event. IPv6 address lists must be formated as series of IPv6 adresses
      separated by semi-colons.
 
-     net.inet6.ndproxyconf_uplink_interface
+     The sysctl utility or rc.conf(5) are used to set ndproxy configuration
+     parameters.
+
+     If you have installed ndproxy as a port or as a package, set the follow-
+     ing variables in rc.conf(5) and load the module at boot time by placing
+     the following line in rc.conf(5):
+
+           ndproxy_enable="YES"
+
+     On the contrary, if you have NOT installed ndproxy as a port or as a
+     package but as a standalone distribution, place the sysctl entries in
+     sysctl.conf(5) and load the module at boot time by placing the following
+     line in loader.conf(5):
+
+           ndproxy_load="YES"
+
+     net.inet6.ndproxyconf_uplink_interface sysctl entry or
+                   ndproxy_uplink_interface rc.conf variable:
 
                    Name of the interface talking to the broadcast multi-access
                    network connecting the PE and CPE routers.
 
                    Example: "vlan2".
 
-     net.inet6.ndproxyconf_downlink_mac_address
+     net.inet6.ndproxyconf_downlink_mac_address sysctl entry or
+                   ndproxy_downlink_mac_address rc.conf variable:
 
                    MAC address of the CPE router. Neighbor advertisements sent
                    by ndproxy will be filled with this address in the target
@@ -266,7 +273,8 @@ CONFIGURATION
 
                    Example: "00:0C:29:B6:43:D5".
 
-     net.inet6.ndproxyconf_exception_ipv6_addresses
+     net.inet6.ndproxyconf_exception_ipv6_addresses sysctl entry or
+                   ndproxy_exception_ipv6_addresses rc.conf variable:
 
                    Target addresses not to proxy. In a simple network design,
                    this list can be let empty. See section "EXCEPTION
@@ -275,7 +283,8 @@ CONFIGURATION
                    Example:
                    "fe80::20d:edff:fe7b:68b7;fe80::222:15ff:fe3b:59a".
 
-     net.inet6.ndproxyconf_uplink_ipv6_addresses
+     net.inet6.ndproxyconf_uplink_ipv6_addresses sysctl entry or
+                   ndproxy_uplink_ipv6_addresses rc.conf variable:
 
                    Addresses of the PE. This list should at least contain the
                    PE link-local address. See section "UPLINK ROUTER
@@ -284,7 +293,7 @@ CONFIGURATION
                    Example:
                    "fe80::207:cbff:fe4b:2d20;2a01:e35:8aae:bc60::1;::".
 
-     net.inet6.ndproxycount
+     net.inet6.ndproxycount sysctl entry:
 
                    Number of advertisements sent.
 
@@ -295,5 +304,4 @@ SEE ALSO
 AUTHOR
      Alexandre Fenyo <alex@fenyo.net> - www.fenyo.net
 
-FreeBSD 10.1                    March 30, 2015                    FreeBSD 10.1
-````
+FreeBSD 10.3                     May 27, 2017                     FreeBSD 10.3

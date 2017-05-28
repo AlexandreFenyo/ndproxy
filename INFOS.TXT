@@ -10,7 +10,8 @@ clean-up everything, as user:
 clean-up everything in port distribution, as root:
   ( cd usr/ports/net/ndproxy && make clean )
 create man pages, as user:
-  make all-man pdf manhtml
+  make all-man pdf manhtml catman
+  (sed '/````manpage/,$d' README.md ; cat MANUAL.TXT) > README.md.new ; mv README.md.new README.md
 look for tags:
   git tag
 select a new version tag: v1.4 in this example
