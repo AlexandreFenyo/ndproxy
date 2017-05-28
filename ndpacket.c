@@ -342,7 +342,7 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
       return 0;
     } else {
 #ifdef DEBUG_NDPROXY
-      printf("NDPROXY INFO: not rejecting target: ");
+      printf("NDPROXY INFO: accepting target: ");
       printf_ip6addr(ndproxy_conf_exception_ipv6_addresses + i, false);
       printf(" - ");
       printf_ip6addr(&nd_na->nd_na_target, false);
