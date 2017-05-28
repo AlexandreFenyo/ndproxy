@@ -119,7 +119,7 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
     printf_ip6addr(&ip6->ip6_src, false);
     #else
     printf_ip6addr((struct in6_addr *) (void *) &ip6->ip6_src, false);
-    #fi
+    #endif
     printf(" (source address)\n");
 #endif
     if (IN6_ARE_ADDR_EQUAL(ndproxy_conf_uplink_ipv6_addresses + i, &ip6->ip6_src)) break;
