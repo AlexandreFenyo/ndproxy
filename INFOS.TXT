@@ -9,21 +9,19 @@ clean-up everything, as user:
   make clean
 clean-up everything in port distribution, as root:
   ( cd usr/ports/net/ndproxy && make clean )
+look for tags:
+  git tag
+select a new version tag: v1.4 in this example
+add the new version tag, as user:
+  git tag v1.4
+  git push --tags
 sync with GitHub, as user:
   git pull
   git add -A
   git commit -m new
   git push
   git push --tags
-look for tags:
-  git tag
-add a new version tag, as user:
-  git tag v1.4
-  git push --tags
 update PORTVERSION in usr/ports/net/ndproxy/Makefile, as user:
   PORTVERSION=    1.4
-
-cd usr/ports/net/ndproxy
-make
-make makesum
-make
+create distinfo, as root:
+  ( cd usr/ports/net/ndproxy && make makesum )
