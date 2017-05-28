@@ -1,4 +1,29 @@
-Installation instructions for FreeBSD 10.x and 11.x:
+
+Installation instructions for FreeBSD 10.x, 11.x and 12.x
+
+------------------------------------------------------------
+
+Installing as a port:
+
+  1- using the port sources from the ports tree:
+    - cd /usr/ports/net/ndproxy
+    - make
+    - make install
+
+  2- using the port sources from the distribution tree:
+    - cd usr/ports/net/ndproxy
+    - make
+    - make install
+
+------------------------------------------------------------
+
+Installing as a package:
+
+  - pkg install ndproxy
+
+------------------------------------------------------------
+
+When not installing from a port or a package:
 
   1- no debugging
     - run 'make clean && make' as user to compile the module and create ndproxy.ko
