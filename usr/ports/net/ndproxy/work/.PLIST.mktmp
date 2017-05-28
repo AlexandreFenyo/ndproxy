@@ -1,0 +1,7 @@
+@kld /boot/modules
+/usr/local/share/licenses/ndproxy-1.2/catalog.mk
+/usr/local/share/licenses/ndproxy-1.2/LICENSE
+/usr/local/share/licenses/ndproxy-1.2/BSD2CLAUSE
+lib/ndproxy/ndproxy.ko
+man/man4/ndproxy.4.gz
+/usr/local/etc/rc.d/ndproxy

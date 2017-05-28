@@ -9,7 +9,7 @@ USE_RC_SUBR=	ndproxy
 USE_GITHUB=	yes
 GH_ACCOUNT=	AlexandreFenyo
 GH_PROJECT=	ndproxy
-GH_TAGNAME=	1.2-test2
+GH_TAGNAME=	v1.2
 
 NO_PACKAGE=	Should be in sync with the kernel to work correctly
 
@@ -22,7 +22,7 @@ LICENSE=	BSD2CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 post-extract:
-	${MV} -f work/ndproxy work/sources
+	${MV} -f work/ndproxy-${GH_TAGNAME} work/sources
 	${RM} -f ${WRKSRC}/.depend
 
 pre-everything::
