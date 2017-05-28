@@ -11,9 +11,13 @@
 # declare name of kernel module
 KMOD    =  ndproxy
 
+#STRIP_CMD+=--strip-debug
+
 # enumerate source files for kernel module
 SRCS    = ndproxy.c ndparse.c ndpacket.c ndconf.c
 MAN    += ndproxy.4
+
+CLEANFILES += ndproxy.ko.debug ndproxy.ko.full
 
 # Include kernel module makefile
 .include <bsd.kmod.mk>
@@ -53,4 +57,3 @@ ci:
 
 update:
 	svn update
-
