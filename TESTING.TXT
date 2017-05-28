@@ -28,3 +28,4 @@ unit testing from the host (W7):
     ping -6 fe80::1:1:1:3%28
     netsh interface ipv6 show neig
     and find fe80::1:1:1:3%28
+
