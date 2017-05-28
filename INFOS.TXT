@@ -7,7 +7,9 @@ publishing ndproxy on GitHub:
 
 clean-up everything, as user:
   make clean
+clean-up everything in port distribution, as root:
   ( cd usr/ports/net/ndproxy && make clean )
+sync with GitHub, as user:
   git pull
   git add -A
   git commit -m new
@@ -15,10 +17,10 @@ clean-up everything, as user:
   git push --tags
 look for tags:
   git tag
-add a new version tag:
+add a new version tag, as user:
   git tag v1.4
   git push --tags
-update PORTVERSION in usr/ports/net/ndproxy/Makefile:
+update PORTVERSION in usr/ports/net/ndproxy/Makefile, as user:
   PORTVERSION=    1.4
 
 cd usr/ports/net/ndproxy
