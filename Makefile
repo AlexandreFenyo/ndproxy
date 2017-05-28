@@ -64,5 +64,8 @@ propset:
 ci:
 	svn ci -m new
 
+distinfo:
+	cd usr/ports/net/ndproxy && make makesum
+
 update:
 	svn update
