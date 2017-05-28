@@ -182,7 +182,12 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
   if (icmp6->icmp6_type != ND_NEIGHBOR_SOLICIT || icmp6->icmp6_code) return 0;
 #ifdef DEBUG_NDPROXY
   printf("NDPROXY DEBUG: got neighbor solicitation from ");
-  printf_ip6addr(&ip6->ip6_src, true); printf("\n");
+  #if (__FreeBSD_version < 1200000)
+  printf_ip6addr(&ip6->ip6_src, true);
+  #else
+  printf_ip6addr((struct in6_addr *) (void *) &ip6->ip6_src, true);
+  #endif
+  printf("\n");
 #endif
 
   // create a new mbuf to send a neighbor advertisement
