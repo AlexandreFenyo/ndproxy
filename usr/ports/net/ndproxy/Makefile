@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	ndproxy
-PORTVERSION=	1.10
+PORTVERSION=	1.11
 CATEGORIES=	net
 WRKSRC=		${WRKDIR}/sources
 USE_RC_SUBR=	ndproxy
