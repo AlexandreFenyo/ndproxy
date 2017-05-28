@@ -22,7 +22,7 @@ LICENSE=	BSD2CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 post-extract:
-	${MV} -f work/ndproxy-${GH_TAGNAME} work/sources
+	${MV} -f work/ndproxy-${PORTVERSION} work/sources
 	${RM} -f ${WRKSRC}/.depend
 
 pre-everything::
