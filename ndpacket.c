@@ -364,7 +364,7 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
     m_freem(mreply);
     return 0;
   }
-  ²
+
   // we send a solicited neighbor advertisement relative to the target contained in the received neighbor solicitation
   nd_na->nd_na_target = nd_ns->nd_ns_target;
 
