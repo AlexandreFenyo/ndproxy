@@ -25,3 +25,9 @@ update PORTVERSION in usr/ports/net/ndproxy/Makefile, as user:
   PORTVERSION=    1.4
 create distinfo, as root:
   ( cd usr/ports/net/ndproxy && make makesum )
+sync with GitHub, as user:
+  git pull
+  git add -A
+  git commit -m new
+  git push
+  git push --tags
