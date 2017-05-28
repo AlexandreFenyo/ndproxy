@@ -1,4 +1,4 @@
-/*-
+12;rgb:0000/0000/0000/*-
  * Copyright (c) 2015-2017 Alexandre Fenyo <alex@fenyo.net> - http://www.fenyo.net
  * All rights reserved.
  *
@@ -112,10 +112,10 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
   // declared in the net.inet6.ndproxyconf_uplink_ipv6_addresses sysctl configuration parameter.
   for (i = 0; i < ndproxy_conf_uplink_ipv6_naddresses; i++) {
 #ifdef DEBUG_NDPROXY
-    printf("NDPROXY INFO: compare:");
+    printf("NDPROXY INFO: compare: ");
     printf_ip6addr(ndproxy_conf_uplink_ipv6_addresses + i, false);
-    printf("-");
-    printf_ip6addr(&ip6->ip6_src, false);printf("\n");
+    printf(" (uplink router address) with ");
+    printf_ip6addr(&ip6->ip6_src, false);printf(" (source address)\n");
 #endif
     if (IN6_ARE_ADDR_EQUAL(ndproxy_conf_uplink_ipv6_addresses + i, &ip6->ip6_src)) break;
   }
