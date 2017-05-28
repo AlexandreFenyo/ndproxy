@@ -1,4 +1,5 @@
 .depend*
 *.o
 *.ko
+*.ko.*
 TAGS
