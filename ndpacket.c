@@ -233,7 +233,11 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
   // According to RFC-4861 (§7.2.4), "The Target Address of the advertisement is copied from the Target Address
   // of the solicitation. [...] If the source of the solicitation is the unspecified address, the
   // node MUST [...] multicast the advertisement to the all-nodes address.".
+  #if (__FreeBSD_version < 1200000)
   if (!IN6_IS_ADDR_UNSPECIFIED(&ip6->ip6_src)) dstaddr = ip6->ip6_src;
+  #else
+  if (!IN6_IS_ADDR_UNSPECIFIED((struct in6_addr *) (void *) &ip6->ip6_src)) dstaddr = ip6->ip6_src;
+  #endif
   else {
     // Check compliance to RFC-4861: "If the IP source address is the unspecified address, the IP
     // destination address is a solicited-node multicast address.".
