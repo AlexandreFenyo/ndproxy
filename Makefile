@@ -1,7 +1,7 @@
 
 # after having changed "#include" statements, call 'rm .depends; make depend' to create a new dependencies file
 
-# compile without debug informations on console:
+# compile without debug informations on console and without debugging symbols:
 #   make
 # compile with debug informations on console:
 #   make DEBUG_FLAGS=-DDEBUG_NDPROXY
@@ -12,7 +12,7 @@
 
 # use install target to copy the module to /boot/kernel and generate hints for the kernel loader:
 #   make install
-# or
+# or, if compiled with debugging symbols:
 #  make DEBUG_FLAGS=-DDEBUG_NDPROXY install
 
 # use all-man target to compress man page
