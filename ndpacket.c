@@ -275,12 +275,13 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
 #endif
   #if (__FreeBSD_version < 1200000)
   if (ret && (ret != EHOSTUNREACH || in6_addrscope(&ip6->ip6_src) == IPV6_ADDR_SCOPE_LINKLOCAL)) {
-  printf_ip6addr(&ip6->ip6_src, false);
-  #else
-  if (ret && (ret != EHOSTUNREACH || in6_addrscope((struct in6_addr *) (void *) &ip6->ip6_src) == IPV6_ADDR_SCOPE_LINKLOCAL)) {
-  #endif
     printf("NDPROXY ERROR: can not select a source address to reply (err=%d), source scope is %x\n",
 	   ret, in6_addrscope(&ip6->ip6_src));
+  #else
+  if (ret && (ret != EHOSTUNREACH || in6_addrscope((struct in6_addr *) (void *) &ip6->ip6_src) == IPV6_ADDR_SCOPE_LINKLOCAL)) {
+    printf("NDPROXY ERROR: can not select a source address to reply (err=%d), source scope is %x\n",
+	   ret, in6_addrscope((struct in6_addr *) (void *) &ip6->ip6_src));
+  #endif
     m_freem(mreply);
     return 0;
   }
