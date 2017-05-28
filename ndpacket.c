@@ -364,7 +364,7 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
     m_freem(mreply);
     return 0;
   }
-  
+  ²
   // we send a solicited neighbor advertisement relative to the target contained in the received neighbor solicitation
   nd_na->nd_na_target = nd_ns->nd_ns_target;
 
@@ -385,7 +385,11 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
       printf("NDPROXY INFO: accepting target: ");
       printf_ip6addr(ndproxy_conf_exception_ipv6_addresses + i, false);
       printf(" - ");
+      #if (__FreeBSD_version < 1200000)
       printf_ip6addr(&nd_na->nd_na_target, false);
+      #else
+      printf_ip6addr((struct in6_addr *) (void *) &nd_na->nd_na_target, false);
+      #endif
       printf("\n");
 #endif
     }
