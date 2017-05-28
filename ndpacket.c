@@ -131,7 +131,11 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
   if (i == ndproxy_conf_uplink_ipv6_naddresses) {
 #ifdef DEBUG_NDPROXY
     printf("NDPROXY INFO: not from uplink router - from: ");
+    #if (__FreeBSD_version < 1200000)
     printf_ip6addr(&ip6->ip6_src, false);
+    #else
+    printf_ip6addr((struct in6_addr *) (void *) &ip6->ip6_src, false);
+    #endif
     printf(" - %d\n", ndproxy_conf_count);
 #endif
     return 0;
