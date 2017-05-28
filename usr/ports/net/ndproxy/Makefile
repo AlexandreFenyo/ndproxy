@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	ndproxy
-PORTVERSION=	1.2
+PORTVERSION=	1.3
 CATEGORIES=	net
 WRKSRC=		${WRKDIR}/sources
 USE_RC_SUBR=	ndproxy
@@ -9,7 +9,7 @@ USE_RC_SUBR=	ndproxy
 USE_GITHUB=	yes
 GH_ACCOUNT=	AlexandreFenyo
 GH_PROJECT=	ndproxy
-GH_TAGNAME=	v1.2
+GH_TAGNAME=	v${PORTVERSION}
 
 NO_PACKAGE=	Should be in sync with the kernel to work correctly
 
