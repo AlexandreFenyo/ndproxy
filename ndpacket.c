@@ -370,7 +370,11 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
 
   // do not manage packets relative to exception target addresses
   for (i = 0; i < ndproxy_conf_exception_ipv6_naddresses; i++)
+    #if (__FreeBSD_version < 1200000)
     if (IN6_ARE_ADDR_EQUAL(ndproxy_conf_exception_ipv6_addresses + i, &nd_na->nd_na_target)) {
+    #else
+    if (IN6_ARE_ADDR_EQUAL(ndproxy_conf_exception_ipv6_addresses + i, (struct in6_addr *) (void *) &nd_na->nd_na_target)) {
+    #endif
 #ifdef DEBUG_NDPROXY
       printf("NDPROXY INFO: rejecting target\n");
 #endif
