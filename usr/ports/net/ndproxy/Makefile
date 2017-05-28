@@ -7,6 +7,6 @@ CATEGORIES=	net
 USE_GITHUB=	yes
 GH_ACCOUNT=	AlexandreFenyo
 GH_PROJECT=	ndproxy
-GH_TAGNAME=	1.2-test1
+GH_TAGNAME=	1.2-test2
 
 .include <bsd.port.mk>
