@@ -355,7 +355,11 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
   nd_na->nd_na_flags_reserved |= ND_NA_FLAG_ROUTER;
 
   // according to RFC-4861 (§7.2.3), the target address can not be a multicast address
+  #if (__FreeBSD_version < 1200000)
   if (IN6_IS_ADDR_MULTICAST(&nd_ns->nd_ns_target)) {
+  #else
+  if (IN6_IS_ADDR_MULTICAST((struct in6_addr *) (void *) &nd_ns->nd_ns_target)) {
+  #endif
     printf("NDPROXY WARNING: rejecting multicast target address\n");
     m_freem(mreply);
     return 0;
