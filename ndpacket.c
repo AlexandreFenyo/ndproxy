@@ -341,7 +341,11 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
   nd_na->nd_na_flags_reserved = 0;
   // According to RFC-4861 (§7.2.4), "If the source of the solicitation is the unspecified address, the
   // node MUST set the Solicited flag to zero [...]"
+  #if (__FreeBSD_version < 1200000)
   if (!IN6_IS_ADDR_UNSPECIFIED(&ip6->ip6_src)) nd_na->nd_na_flags_reserved = ND_NA_FLAG_SOLICITED;
+  #else
+  if (!IN6_IS_ADDR_UNSPECIFIED((struct in6_addr *) (void *) &ip6->ip6_src)) nd_na->nd_na_flags_reserved = ND_NA_FLAG_SOLICITED;
+  #endif
 
   // According to RFC-4861 (§7.2.4), "If the Target Address is either an anycast address or a unicast
   // address for which the node is providing proxy service, [...] the Override flag SHOULD
