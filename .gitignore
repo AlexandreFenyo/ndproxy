@@ -2,3 +2,6 @@
 *.o
 *.ko
 TAGS
+export_syms
+machine
+x86
