@@ -115,14 +115,18 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
     printf("NDPROXY INFO: compare: ");
     printf_ip6addr(ndproxy_conf_uplink_ipv6_addresses + i, false);
     printf(" (uplink router address) with ");
-    #if (__FreeBSD_version <= 1100000)
+    #if (__FreeBSD_version < 1200000)
     printf_ip6addr(&ip6->ip6_src, false);
     #else
     printf_ip6addr((struct in6_addr *) (void *) &ip6->ip6_src, false);
     #endif
     printf(" (source address)\n");
 #endif
+    #if (__FreeBSD_version < 1200000)
     if (IN6_ARE_ADDR_EQUAL(ndproxy_conf_uplink_ipv6_addresses + i, &ip6->ip6_src)) break;
+    #else
+    if (IN6_ARE_ADDR_EQUAL(ndproxy_conf_uplink_ipv6_addresses + i, (struct in6_addr *) (void *) &ip6->ip6_src)) break;
+    #endif
   }
   if (i == ndproxy_conf_uplink_ipv6_naddresses) {
 #ifdef DEBUG_NDPROXY
