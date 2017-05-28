@@ -5,11 +5,23 @@ READ INSTALL.TXT to install ndproxy
 
 publishing ndproxy on GitHub:
 
-make clean
-( cd usr/ports/net/ndproxy && make clean )
-git pull
-git add -A
-git commit -m new
-git push
-git push --tags
+clean-up everything, as user:
+  make clean
+  ( cd usr/ports/net/ndproxy && make clean )
+  git pull
+  git add -A
+  git commit -m new
+  git push
+  git push --tags
+look for tags:
+  git tag
+add a new version tag:
+  git tag v1.4
+  git push --tags
+update PORTVERSION in usr/ports/net/ndproxy/Makefile:
+  PORTVERSION=    1.4
 
+cd usr/ports/net/ndproxy
+make
+make makesum
+make
