@@ -1,12 +1,12 @@
 Installation instructions for FreeBSD 10.x and 11.x:
 
   1- no debugging
-    - run 'make' as user to compile the module and create ndproxy.ko
+    - run 'make clean && make' as user to compile the module and create ndproxy.ko
     - run 'make install' as root to install the module
     - run 'make maninstall' as root to install the man page
 
   2- debug messages on console and debugging symbols:
-    - run 'make DEBUG_FLAGS=-DDEBUG_NDPROXY' as user to compile the module and create ndproxy.ko
+    - run 'make clean && make DEBUG_FLAGS=-DDEBUG_NDPROXY' as user to compile the module and create ndproxy.ko
     - run 'make DEBUG_FLAGS=-DDEBUG_NDPROXY install' as root to install the module
     - run 'make maninstall' as root to install the man page
 
