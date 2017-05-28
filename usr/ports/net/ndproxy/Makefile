@@ -3,8 +3,6 @@
 PORTNAME=	ndproxy
 PORTVERSION=	1.2
 CATEGORIES=	net
-MASTER_SITES=	https://www.vpnoverdns.com/${PORTNAME}/ \
-		http://www.fenyo.net/newweb/${PORTNAME}/
 WRKSRC=		${WRKDIR}/sources
 USE_RC_SUBR=	ndproxy
 
