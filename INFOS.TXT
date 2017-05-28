@@ -9,6 +9,8 @@ clean-up everything, as user:
   make clean
 clean-up everything in port distribution, as root:
   ( cd usr/ports/net/ndproxy && make clean )
+create man pages, as user:
+  make all-man pdf manhtml
 look for tags:
   git tag
 select a new version tag: v1.4 in this example
