@@ -25,7 +25,7 @@ Installing as a package:
 
 When not installing from a port or a package:
 
-  1- no debugging
+  1- no debugging:
     - run 'make clean && make' as user to compile the module and create ndproxy.ko
     - run 'make install' as root to install the module
     - run 'make maninstall' as root to install the man page
