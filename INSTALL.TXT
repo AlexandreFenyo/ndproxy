@@ -1,4 +1,4 @@
-Installation instructions for FreeBSD 10.x:
+Installation instructions for FreeBSD 10.x and 11.x:
 - run 'make' as user to compile the module and create ndproxy.ko
 - run 'make install' as root to install the module
 - run 'make maninstall' as root to install the man page

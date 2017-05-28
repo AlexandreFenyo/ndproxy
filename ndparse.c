@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2015 Alexandre Fenyo <alex@fenyo.net> - http://www.fenyo.net
+ * Copyright (c) 2015-2017 Alexandre Fenyo <alex@fenyo.net> - http://www.fenyo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,28 +27,17 @@
  */
 
 #include <sys/param.h>
-#include <sys/module.h>
-#include <sys/kernel.h>
 #include <sys/systm.h>
-#include <sys/kdb.h>
-#include <sys/sysctl.h>
 #include <sys/socket.h>
-#include <sys/mbuf.h>
-#include <net/if.h>
-#include <net/pfil.h>
-#include <net/bpf.h>
-#include <netinet/in.h>
-#include <netinet/in_pcb.h>
-#include <netinet/ip6.h>
-#include <netinet6/in6_var.h>
-#include <netinet6/ip6_var.h>
-#include <netinet/icmp6.h>
-#include <netinet6/scope6_var.h>
-#include <netinet6/in6_ifattach.h>
-#include <netinet6/nd6.h>
-#include <net/route.h>
-#include <net/ethernet.h>
 #include <sys/ctype.h>
+#include <net/if.h>
+#include <net/ethernet.h>
+#include <netinet/in.h>
+#include <netinet6/scope6_var.h>
+
+#if (__FreeBSD_version < 1100000)
+#include <netinet6/in6_var.h>
+#endif
 
 #include "ndparse.h"
 #include "ndconf.h"
@@ -157,7 +146,7 @@ void printf_ip6addr_network_format(const struct in6_addr *addrp) {
 
   //  for (int i = 0; i < 4; i++) printf("addr[%d] = %x\n", i, tmpaddr.__u6_addr.__u6_addr32[i]);
   for (int i = 0; i < 16; i++) {
-    printf("%02X", ((unsigned char *) addrp)[i]);
+    printf("%02X", ((const unsigned char *) addrp)[i]);
     if (i%2 && i != 15) printf(":");
   }
 }

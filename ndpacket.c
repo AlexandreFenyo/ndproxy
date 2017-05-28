@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2015 Alexandre Fenyo <alex@fenyo.net> - http://www.fenyo.net
+ * Copyright (c) 2015-2017 Alexandre Fenyo <alex@fenyo.net> - http://www.fenyo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,30 +27,17 @@
  */
 
 #include <sys/param.h>
-#include <sys/module.h>
-#include <sys/kernel.h>
-#include <sys/systm.h>
-#include <sys/kdb.h>
-#include <sys/sysctl.h>
 #include <sys/socket.h>
-#include <sys/mbuf.h>
 #include <net/if.h>
-#include <net/pfil.h>
-#include <net/bpf.h>
+#include <net/if_var.h>
+#include <net/ethernet.h>
 #include <netinet/in.h>
 #include <netinet/in_pcb.h>
+#include <netinet/icmp6.h>
 #include <netinet/ip6.h>
 #include <netinet6/in6_var.h>
 #include <netinet6/ip6_var.h>
-#include <netinet/icmp6.h>
 #include <netinet6/scope6_var.h>
-#include <netinet6/in6_ifattach.h>
-#include <netinet6/nd6.h>
-#include <net/route.h>
-#include <net/ethernet.h>
-#include <sys/ctype.h>
-
-#include <net/if_types.h>
 
 #include "ndpacket.h"
 #include "ndconf.h"
@@ -254,14 +241,21 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
   }
     
   // first, apply the RFC-3484 default address selection algorithm to get a source address for the advertisement packet.
+#if (__FreeBSD_version < 1100000)
   ret = in6_selectsrc(&dst_sa, NULL, NULL, NULL, NULL, NULL, &srcaddr);
+#else
+    uint32_t _dst_sa_scopeid;
+    struct in6_addr _dst_sa;
+    in6_splitscope(&dst_sa.sin6_addr, &_dst_sa, &_dst_sa_scopeid);
+    ret = in6_selectsrc_addr(RT_DEFAULT_FIB, &_dst_sa,
+			     _dst_sa_scopeid, packet_ifnet, &srcaddr, NULL);
+#endif
   if (ret && (ret != EHOSTUNREACH || in6_addrscope(&ip6->ip6_src) == IPV6_ADDR_SCOPE_LINKLOCAL)) {
     printf("NDPROXY ERROR: can not select a source address to reply (err=%d), source scope is %x\n",
 	   ret, in6_addrscope(&ip6->ip6_src));
     m_freem(mreply);
     return 0;
   }
-
   if (ret) {
     // secondly, try to reply with a link-local address attached to the receiving interface
     struct in6_ifaddr *llifaddr = in6ifa_ifpforlinklocal(packet_ifnet, 0);

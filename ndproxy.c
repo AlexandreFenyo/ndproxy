@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2015 Alexandre Fenyo <alex@fenyo.net> - http://www.fenyo.net
+ * Copyright (c) 2015-2017 Alexandre Fenyo <alex@fenyo.net> - http://www.fenyo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,28 +27,18 @@
  */
 
 #include <sys/param.h>
-#include <sys/module.h>
-#include <sys/kernel.h>
 #include <sys/systm.h>
-#include <sys/kdb.h>
-#include <sys/sysctl.h>
+#include <sys/kernel.h>
+#include <sys/malloc.h>
+#include <sys/types.h>
 #include <sys/socket.h>
-#include <sys/mbuf.h>
+#include <sys/module.h>
+#include <sys/sysctl.h>
 #include <net/if.h>
 #include <net/pfil.h>
-#include <net/bpf.h>
-#include <netinet/in.h>
-#include <netinet/in_pcb.h>
-#include <netinet/ip6.h>
-#include <netinet6/in6_var.h>
-#include <netinet6/ip6_var.h>
-#include <netinet/icmp6.h>
-#include <netinet6/scope6_var.h>
-#include <netinet6/in6_ifattach.h>
-#include <netinet6/nd6.h>
-#include <net/route.h>
+#include <net/if_var.h>
 #include <net/ethernet.h>
-#include <sys/ctype.h>
+#include <netinet/in.h>
 
 #include "ndproxy.h"
 #include "ndconf.h"
