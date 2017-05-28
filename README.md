@@ -2,7 +2,7 @@
 
 kernel module for FreeBSD that implements IPv6 Neighbor Discovery proxying over Ethernet-like access networks
 
-<center>![network architecture](https://raw.githubusercontent.com/AlexandreFenyo/ndproxy/master/network-architecture.png)</center>
+![network architecture](https://raw.githubusercontent.com/AlexandreFenyo/ndproxy/master/network-architecture.png)
 
 ````manpage
 NDPROXY(4)             FreeBSD Kernel Interfaces Manual             NDPROXY(4)
