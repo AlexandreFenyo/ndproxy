@@ -46,7 +46,7 @@ manhtml: ndproxy.4
 	groff -Thtml -man ndproxy.4 > ndproxy.html
 
 catman: ndproxy.4
-	groff -Tascii -man ndproxy.4 | sed 's/.\[[012]*m//g' > NDPROXY.TXT
+	groff -Tascii -man ndproxy.4 | sed 's/.\[[012]*m//g' > MANUAL.TXT
 
 lines:
 	wc -l *.c *.h
