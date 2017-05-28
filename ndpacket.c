@@ -415,8 +415,13 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
 				 mreply->m_len - sizeof(struct ip6_hdr));
 
 #ifdef DEBUG_NDPROXY
+  #if (__FreeBSD_version < 1200000)
   printf("NDPROXY DEBUG: src="); printf_ip6addr(&ip6reply->ip6_src, false); printf(" / ");
   printf("dst="); printf_ip6addr(&ip6reply->ip6_dst, false); printf("\n");
+  #else
+  printf("NDPROXY DEBUG: src="); printf_ip6addr((struct in6_addr *) (void *) &ip6reply->ip6_src, false); printf(" / ");
+  printf("dst="); printf_ip6addr((struct in6_addr *) (void *) &ip6reply->ip6_dst, false); printf("\n");
+  #endif
 #endif
 
   struct ip6_moptions im6o;
