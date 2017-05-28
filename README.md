@@ -1,6 +1,6 @@
 # ndproxy
 
-kernel module for FreeBSD that implements IPv6 Neighbor Discovery proxying over Ethernet-like access networks
+Kernel module for FreeBSD that implements IPv6 Neighbor Discovery proxying over Ethernet-like access networks
 
 Tested with success on FreeBSD 10.x, FreeBSD 11.x and CURRENT (FreeBSD 12)
 
