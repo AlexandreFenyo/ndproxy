@@ -1,6 +1,6 @@
 %!PS-Adobe-3.0
 %%Creator: groff version 1.19.2
-%%CreationDate: Thu Apr  9 01:25:07 2015
+%%CreationDate: Sun May 28 19:22:20 2017
 %%DocumentNeededResources: font Times-Roman
 %%+ font Times-Bold
 %%+ font Courier-Bold
@@ -248,137 +248,139 @@ BP
 G(or e)-2.5 E -.15(ve)-.25 G(ry IPv6 incoming pack).15 E(et, in)-.1 E(o\
 rder to speci\214cally handle and \214lter neighbor solicitations and r\
 eply with appropriate neighbor adv)102 228 Q(ertise-)-.15 E(ments.)102
-240 Q 1.6 -.8(To l)102 258 T
-(oad the module at boot time, place the follo).8 E(wing line in)-.25 E
-F3(loader.conf)2.5 E F0(\(5\):)A F3(ndproxy_load="YES")132 276 Q F0
-(ND \(Neighbor Disco)102 294 Q -.15(ve)-.15 G(ry\) pack).15 E
+240 Q(ND \(Neighbor Disco)102 258 Q -.15(ve)-.15 G(ry\) pack).15 E
 (ets are mainly tar)-.1 E
 (geted at solicited-node multicast addresses, b)-.18 E(ut ndproxy has)
--.2 E(no information about the hosts to proxy)102 306 Q 2.5(,t)-.65 G
+-.2 E(no information about the hosts to proxy)102 270 Q 2.5(,t)-.65 G
 (hen it can not join the corresponding groups. Thus, the interf)-2.5 E
 (ace on)-.1 E(which ndproxy listen to solicitations must be put into pe\
-rmanently promiscuous mode: add "promisc" to the)102 318 Q
-(ifcon\214g_<interf)102 330 Q(ace> v)-.1 E(ariable in)-.25 E F3(rc.conf)
-2.5 E F0(\(5\).)A -.15(Fo)102 348 S 2.5(rt).15 G(he same reason, MLD sn\
+rmanently promiscuous mode: add "promisc" to the)102 282 Q
+(ifcon\214g_<interf)102 294 Q(ace> v)-.1 E(ariable in)-.25 E F3(rc.conf)
+2.5 E F0(\(5\).)A -.15(Fo)102 312 S 2.5(rt).15 G(he same reason, MLD sn\
 ooping must be disabled on the switches that share the PE/CPE interconn\
-ect)-2.5 E(\(the layer)102 360 Q(-2 link the listening interf)-.2 E(ace\
+ect)-2.5 E(\(the layer)102 324 Q(-2 link the listening interf)-.2 E(ace\
  is attached to\). Note that MLD snooping must not be disabled entirely)
--.1 E(on each switch, b)102 372 Q(ut only on the corresponding vlan.)-.2
-E(The interf)102 390 Q(ace on which ndproxy listen to solicitations onl\
+-.1 E(on each switch, b)102 336 Q(ut only on the corresponding vlan.)-.2
+E(The interf)102 354 Q(ace on which ndproxy listen to solicitations onl\
 y need to be assigned a link-local address. No infor)-.1 E(-)-.2 E
-(mation about the dele)102 402 Q -.05(ga)-.15 G
+(mation about the dele)102 366 Q -.05(ga)-.15 G
 (ted pre\214x and no global address are needed on this interf).05 E
 (ace. It is suf)-.1 E(\214cient to add)-.25 E("inet6 -ifdisabled -accep\
-t_rtadv auto_linklocal" to the ifcon\214g_<interf)102 414 Q(ace>_ipv6 v)
+t_rtadv auto_linklocal" to the ifcon\214g_<interf)102 378 Q(ace>_ipv6 v)
 -.1 E(ariable in)-.25 E F3(rc.conf)2.5 E F0(\(5\).)A F1 1.666
-(DIFFERENCES WITH NDP)72 438 R F0 .331(The tar)102 450 R .331
+(DIFFERENCES WITH NDP)72 402 R F0 .331(The tar)102 414 R .331
 (get address to proxy must be gi)-.18 F -.15(ve)-.25 G 2.831(nw).15 G
 .331(hen using the)-2.831 F F3(ndp)2.83 E F0 .33
 (\(8\) command-line tool with the proxy option.)B 1.247(On the contrary)
-102 462 R 3.747(,n)-.65 G 1.247(dproxy does not rely on a list of tar)
+102 426 R 3.747(,n)-.65 G 1.247(dproxy does not rely on a list of tar)
 -3.747 F 1.247(get addresses to proxy)-.18 F 3.747(.T)-.65 G 1.247
 (hus, RFC-4941 temporary)-3.747 F 1.473(addresses can be proxy\214ed. F)
-102 474 R 1.472(or security reasons, man)-.15 F 3.972(yo)-.15 G 1.472
+102 438 R 1.472(or security reasons, man)-.15 F 3.972(yo)-.15 G 1.472
 (perating systems use a temporary address when)-3.972 F
-(establishing outbound connections.)102 486 Q 1.196(When using)102 504 R
+(establishing outbound connections.)102 450 Q 1.196(When using)102 468 R
 F3(ndp)3.696 E F0 1.196
 (\(8\) command-line tool with the proxy option, the proxy\214ed pack)B
-1.196(ets are redirected to the)-.1 F .572(node that run ndp. W)102 516
+1.196(ets are redirected to the)-.1 F .572(node that run ndp. W)102 480
 R .572(ith ndproxy)-.4 F 3.072(,t)-.65 G .571
 (he host that run ndp can be used only to redirect pack)-3.072 F .571
-(ets to another IPv6)-.1 F(internal router)102 528 Q 2.5(,f)-.4 G
+(ets to another IPv6)-.1 F(internal router)102 492 Q 2.5(,f)-.4 G
 (or instance a dedicated router with hardw)-2.5 E
 (are support of IPv6 routing process.)-.1 E F1 1.666(PREFIX SUBNETTING)
-72 552 R F0 .511(Connecting a \215at IPv6 netw)102 564 R .511(ork to th\
+72 516 R F0 .511(Connecting a \215at IPv6 netw)102 528 R .511(ork to th\
 e Internet is easily done with the RFC-4861 ND protocol. But connect-)
 -.1 F .145(ing a subnetted IPv6 pre\214x is more complicated, depending\
- on the ISP netw)102 576 R .145(ork design choices.)-.1 F .145
-(ndproxy can)5.145 F(help subscribers to achie)102 588 Q .3 -.15(ve t)
+ on the ISP netw)102 540 R .145(ork design choices.)-.1 F .145
+(ndproxy can)5.145 F(help subscribers to achie)102 552 Q .3 -.15(ve t)
 -.25 H(his goal.).15 E .486(Here are some protocols or mechanisms the I\
-SP need to support, when the dele)102 606 R -.05(ga)-.15 G .487
+SP need to support, when the dele)102 570 R -.05(ga)-.15 G .487
 (ted pre\214x must be subnet-).05 F .674
-(ted and assigned to multiple links within the subscriber')102 618 R
+(ted and assigned to multiple links within the subscriber')102 582 R
 3.174(sn)-.55 G(etw)-3.174 E 3.174(ork. F)-.1 F .673
 (or instance, the ISP could learn routes)-.15 F .783
-(from the subscriber router using an IGP routing protocol, b)102 630 R
+(from the subscriber router using an IGP routing protocol, b)102 594 R
 .783(ut the ISP and the subscriber must agree with a)-.2 F .445
-(common routing protocol.)102 642 R .445
+(common routing protocol.)102 606 R .445
 (The ISP could also feed the PE with a static route to the CPE router)
 5.445 F 2.945(,b)-.4 G .445(ut the ISP)-3.145 F .525
-(must be informed about the subscriber router address.)102 654 R
+(must be informed about the subscriber router address.)102 618 R
 (Finally)5.525 E 3.025(,t)-.65 G .525
 (he ISP could use the RFC-3633 IPv6 Pre\214x)-3.025 F .397
-(Options with DHCPv6 to dele)102 666 R -.05(ga)-.15 G .396
+(Options with DHCPv6 to dele)102 630 R -.05(ga)-.15 G .396
 (te the pre\214x from its PE router to a requesting subscriber').05 F
 2.896(sr)-.55 G .396(outer: in such a)-2.896 F
-(case, the ISP must support the DHCPv6 option.)102 678 Q(FreeBSD 10.1)72
-750 Q(March 30, 2015)144.98 E(1)197.2 E 0 Cg EP
+(case, the ISP must support the DHCPv6 option.)102 642 Q .809
+(ndproxy has been written for subscribers to ISP that do not support an)
+102 660 R 3.309(yo)-.15 G 3.309(ft)-3.309 G .809
+(hose mechanisms or protocols,)-3.309 F(thus not being able to nati)102
+672 Q -.15(ve)-.25 G(ly subnet their IPv6 dele).15 E -.05(ga)-.15 G
+(ted pre\214x.).05 E(FreeBSD 10.3)72 750 Q(May 27, 2017)148.865 E(1)
+201.085 E 0 Cg EP
 %%Page: 2 2
 %%BeginPageSetup
 BP
 %%EndPageSetup
 /F0 10/Times-Roman@0 SF(NDPR)72 48 Q -.4(OX)-.4 G 1.666(Y\().4 G 99.869
 (4\) FreeBSD)-1.666 F -.25(Ke)2.5 G(rnel Interf).25 E(aces Manual)-.1 E
-(NDPR)102.369 E -.4(OX)-.4 G 1.666(Y\().4 G(4\))-1.666 E .809
-(ndproxy has been written for subscribers to ISP that do not support an)
-102 96 R 3.309(yo)-.15 G 3.309(ft)-3.309 G .809
-(hose mechanisms or protocols,)-3.309 F(thus not being able to nati)102
-108 Q -.15(ve)-.25 G(ly subnet their IPv6 dele).15 E -.05(ga)-.15 G
-(ted pre\214x.).05 E/F1 10/Times-Bold@0 SF(NETW)72 132 Q 1.666
-(ORK DESIGN)-.1 F F0(Here is a generic netw)102 144 Q
-(ork design using ndproxy to solv)-.1 E 2.5(es)-.15 G(uch situations:)
--2.5 E/F2 10/Courier@0 SF 96(______________________ \\)120 156 R 132
-(/\\)114 168 S(\\)-30 E 18(|I)114 180 S(SP core network)-18 E 108(|\\)18
-G(\\__________ ___________/)114 192 Q(|)114 E 186(||)180 204 S
-(ISP network)-180 E 6(|d)180 216 S(sl to subscriber premises)-6 E(|)24 E
-180(|/)180 228 S 36(+---+---------------------+ /)156 240 R 12(|P)156
-252 S 6(Eo)-12 G 6(rt)-6 G(riple-play box)-6 E 36(|/)12 G
-(+-----------+-------------+)156 264 Q(|)228 276 Q
-(PE/CPE interconnect | /48 prefix)108 288 Q(\\)54 E 48
-(--+---------+---------+-- \\)156 300 R 12(|n)168 312 S 6(om)-12 G
-(ld snooping)-6 E 72(|\\)12 G 114(||)168 324 S(|)-36 E 24
-(+----+--------+ +----+-----+)138 336 R(|)42 E 30(|C)138 348 S 24
-(PE | |)-30 F 6(ndproxy |)6 F(|)42 E 6(|I)138 360 S(Pv6 router |)-6 E 6
-(|B)30 G(SD host |)-6 E(|)42 E 24(+----+---+----+ +----------+)138 372 R
-(|)42 E 6(subnet1 |)114 384 R 12(|s)18 G 114(ubnet2 |)-12 F(Subscriber)6
-E(----+-----+- -+-----+------)108 396 Q 6(|n)102 G(etwork)-6 E 6(|/)132
-408 S 60(60 |)-6 F 108(/60 |)6 F 12(+---+------+ +----+-----+)108 420 R
-(|)102 E 12(|Subscriber| |Subscriber|)108 432 R(/)96 E 12(|h)108 444 S
+(NDPR)102.369 E -.4(OX)-.4 G 1.666(Y\().4 G(4\))-1.666 E/F1 10
+/Times-Bold@0 SF(NETW)72 96 Q 1.666(ORK DESIGN)-.1 F F0
+(Here is a generic netw)102 108 Q(ork design using ndproxy to solv)-.1 E
+2.5(es)-.15 G(uch situations:)-2.5 E/F2 10/Courier@0 SF 96
+(______________________ \\)120 120 R 132(/\\)114 132 S(\\)-30 E 18(|I)
+114 144 S(SP core network)-18 E 108(|\\)18 G(\\__________ ___________/)
+114 156 Q(|)114 E 186(||)180 168 S(ISP network)-180 E 6(|d)180 180 S
+(sl to subscriber premises)-6 E(|)24 E 180(|/)180 192 S 36
+(+---+---------------------+ /)156 204 R 12(|P)156 216 S 6(Eo)-12 G 6
+(rt)-6 G(riple-play box)-6 E 36(|/)12 G(+-----------+-------------+)156
+228 Q(|)228 240 Q(PE/CPE interconnect | /48 prefix)108 252 Q(\\)54 E 48
+(--+---------+---------+-- \\)156 264 R 12(|n)168 276 S 6(om)-12 G
+(ld snooping)-6 E 72(|\\)12 G 114(||)168 288 S(|)-36 E 24
+(+----+--------+ +----+-----+)138 300 R(|)42 E 30(|C)138 312 S 24
+(PE | |)-30 F 6(ndproxy |)6 F(|)42 E 6(|I)138 324 S(Pv6 router |)-6 E 6
+(|B)30 G(SD host |)-6 E(|)42 E 24(+----+---+----+ +----------+)138 336 R
+(|)42 E 6(subnet1 |)114 348 R 12(|s)18 G 114(ubnet2 |)-12 F(Subscriber)6
+E(----+-----+- -+-----+------)108 360 Q 6(|n)102 G(etwork)-6 E 6(|/)132
+372 S 60(60 |)-6 F 108(/60 |)6 F 12(+---+------+ +----+-----+)108 384 R
+(|)102 E 12(|Subscriber| |Subscriber|)108 396 R(/)96 E 12(|h)108 408 S
 18(ost |)-12 F 12(|h)18 G 18(ost |)-12 F(/)90 E 12
-(+----------+ +----------+)108 456 R(/)84 E F0 .74(Note that man)102 474
+(+----------+ +----------+)108 420 R(/)84 E F0 .74(Note that man)102 438
 R 3.24(yo)-.15 G .739(ther use-cases can be handled with ndproxy: the B\
 SD host and the CPE router can be the)-3.24 F .423(same node, the dele)
-102 486 R -.05(ga)-.15 G .423
+102 450 R -.05(ga)-.15 G .423
 (ted-pre\214x length can be /64, the PE router can ha).05 F .724 -.15
 (ve s)-.2 H -2.15 -.25(ev e).15 H .424(ral interf).25 F .424
-(aces on the ISP/Sub-)-.1 F(scriber layer)102 498 Q(-2 boundary)-.2 E
+(aces on the ISP/Sub-)-.1 F(scriber layer)102 462 Q(-2 boundary)-.2 E
 2.5(,t)-.65 G(here can be multiple PE routers, etc.)-2.5 E F1 1.666
-(PREFIX LENGTH)72 522 R F0(Ev)102 534 Q .646(en if the IESG and the IAB\
+(PREFIX LENGTH)72 486 R F0(Ev)102 498 Q .646(en if the IESG and the IAB\
  \214rst recommended the allocations of /48 pre\214x)-.15 F .645
 (es in the general case, for the)-.15 F .109
-(boundary between the public and the pri)102 546 R -.25(va)-.25 G .109
+(boundary between the public and the pri)102 510 R -.25(va)-.25 G .109
 (te topology \(see RFC-3177\), and that some Re).25 F .11
 (gional Internet Re)-.15 F(g-)-.15 E .402
-(istries \(APNIC, ARIN and RIPE\) ha)102 558 R .702 -.15(ve s)-.2 H .402
+(istries \(APNIC, ARIN and RIPE\) ha)102 522 R .702 -.15(ve s)-.2 H .402
 (ubsequently re).15 F .402(vised the end site assignment polic)-.25 F
 2.902(yt)-.15 G 2.902(oe)-2.902 G .402(ncourage the)-2.902 F 1.217(assi\
 gnment of /56 blocks to end sites, and that RFC-6177 \214nally recommen\
-ded gi)102 570 R 1.217(ving home sites signi\214-)-.25 F .517
-(cantly more than a single /64, in order for home sites to be gi)102 582
+ded gi)102 534 R 1.217(ving home sites signi\214-)-.25 F .517
+(cantly more than a single /64, in order for home sites to be gi)102 546
 R -.15(ve)-.25 G 3.017(nm).15 G .516
-(ultiple subnets, some ISP currently only)-3.017 F(dele)102 594 Q -.05
+(ultiple subnets, some ISP currently only)-3.017 F(dele)102 558 Q -.05
 (ga)-.15 G(te /64 pre\214x).05 E(es.)-.15 E .344(In such a case, the su\
 bscriber should subnet a RFC-4193 Unique Local IPv6 Unicast Addresses p\
-re\214x to the)102 612 R .606(internal subnetw)102 624 R .605(orks, for\
+re\214x to the)102 576 R .606(internal subnetw)102 588 R .605(orks, for\
  internal-to-internal communications. The /64 global pre\214x should be\
  routed to the)-.1 F .455(only internal subnet in which RFC-4941 tempor\
-ary addresses are used by hosts when establishing outbound)102 636 R
+ary addresses are used by hosts when establishing outbound)102 600 R
 .949(connections. Static routes on the CPE router should be set to let \
-hosts on other internal subnets be able to)102 648 R .358(communicate w\
+hosts on other internal subnets be able to)102 612 R .358(communicate w\
 ith the Internet. Using temporary addresses for outbound connections to\
- the Internet must be)102 660 R
-(disabled on hosts on those other internal subnets.)102 672 Q
-(FreeBSD 10.1)72 750 Q(March 30, 2015)144.98 E(2)197.2 E 0 Cg EP
+ the Internet must be)102 624 R
+(disabled on hosts on those other internal subnets.)102 636 Q F1 1.666
+(IPv6 EXTENSION HEADERS)72 660 R F0 -.15(Fo)102 672 S 4.912(rs).15 G
+2.412(ecurity reasons, ndproxy e)-4.912 F 2.412
+(xplicitely rejects neighbor solicitation pack)-.15 F 2.412
+(ets containing an)-.1 F 4.911(ye)-.15 G(xtension)-5.061 E(header)102
+684 Q 5(.S)-.55 G(uch a pack)-5 E(et is mainly unattended:)-.1 E
+(FreeBSD 10.3)72 750 Q(May 27, 2017)148.865 E(2)201.085 E 0 Cg EP
 %%Page: 3 3
 %%BeginPageSetup
 BP
@@ -386,163 +388,174 @@ BP
 /F0 10/Times-Roman@0 SF(NDPR)72 48 Q -.4(OX)-.4 G 1.666(Y\().4 G 99.869
 (4\) FreeBSD)-1.666 F -.25(Ke)2.5 G(rnel Interf).25 E(aces Manual)-.1 E
 (NDPR)102.369 E -.4(OX)-.4 G 1.666(Y\().4 G(4\))-1.666 E/F1 10
-/Times-Bold@0 SF 1.666(IPv6 EXTENSION HEADERS)72 96 R F0 -.15(Fo)102 108
-S 4.912(rs).15 G 2.412(ecurity reasons, ndproxy e)-4.912 F 2.412
-(xplicitely rejects neighbor solicitation pack)-.15 F 2.412
-(ets containing an)-.1 F 4.911(ye)-.15 G(xtension)-5.061 E(header)102
-120 Q 5(.S)-.55 G(uch a pack)-5 E(et is mainly unattended:)-.1 E F1
-(Fragmentation:)102 138 Q F0 1.062(According to RFC-6980, IPv6 fragment\
-ation header is forbidden in all neighbor disco)167 156 R -.15(ve)-.15 G
-(ry).15 E(messages.)167 168 Q F1(Hop-by-hop header:)102 186 Q F0 .245
-(commonly used for jumbograms or for MLD. Should not in)167 204 R -.2
-(vo)-.4 G(lv).2 E 2.745(en)-.15 G .245(eighbor solicitation pack-)-2.745
-F(ets.)167 216 Q F1(Destination mobility headers:)102 234 Q F0
-(commonly used for mobility)167 252 Q 2.5(,n)-.65 G
-(dproxy does not support these headers.)-2.5 E F1(Routing header:)102
-270 Q F0(commonly used for mobility or source routing, ndproxy does not\
- support these headers.)167 288 Q F1(AH & ESP headers:)102 306 Q F0 .015
-(securing the neighbor disco)167 324 R -.15(ve)-.15 G .016
-(ry process is not done with IPsec b).15 F .016
-(ut with the SEcure Neighbor)-.2 F(Disco)167 336 Q -.15(ve)-.15 G 1.055
+/Times-Bold@0 SF(Fragmentation:)102 96 Q F0 1.062(According to RFC-6980\
+, IPv6 fragmentation header is forbidden in all neighbor disco)167 114 R
+-.15(ve)-.15 G(ry).15 E(messages.)167 126 Q F1(Hop-by-hop header:)102
+144 Q F0 .245(commonly used for jumbograms or for MLD. Should not in)167
+162 R -.2(vo)-.4 G(lv).2 E 2.745(en)-.15 G .245
+(eighbor solicitation pack-)-2.745 F(ets.)167 174 Q F1
+(Destination mobility headers:)102 192 Q F0(commonly used for mobility)
+167 210 Q 2.5(,n)-.65 G(dproxy does not support these headers.)-2.5 E F1
+(Routing header:)102 228 Q F0(commonly used for mobility or source rout\
+ing, ndproxy does not support these headers.)167 246 Q F1
+(AH & ESP headers:)102 264 Q F0 .015(securing the neighbor disco)167 282
+R -.15(ve)-.15 G .016(ry process is not done with IPsec b).15 F .016
+(ut with the SEcure Neighbor)-.2 F(Disco)167 294 Q -.15(ve)-.15 G 1.055
 (ry protocol \(RFC-3971\). ndproxy can not support RFC-3971, since prox\
-ifying ND).15 F(pack)167 348 Q
+ifying ND).15 F(pack)167 306 Q
 (ets is some kind of a spoo\214ng process.)-.1 E F1 1.666
-(EXCEPTION ADDRESSES)72 372 R F0(Some neigbhor solicitations sent on th\
-e PE/CPE interconnect must not be proxy\214ed:)102 384 Q 10
-(1. solicitations)102 402 R(sent by other nodes than the PE;)2.5 E 10
-(2. solicitations)102 420 R .411(sent by the PE to reach an)2.911 F
+(EXCEPTION ADDRESSES)72 330 R F0(Some neigbhor solicitations sent on th\
+e PE/CPE interconnect must not be proxy\214ed:)102 342 Q 10
+(1. solicitations)102 360 R(sent by other nodes than the PE;)2.5 E 10
+(2. solicitations)102 378 R .411(sent by the PE to reach an)2.911 F
 2.911(yo)-.15 G .411(n-link address \(the address \214lled in the tar)
--2.911 F .412(get address option\))-.18 F -.25(ow)122 432 S .015(ned by\
+-2.911 F .412(get address option\))-.18 F -.25(ow)122 390 S .015(ned by\
  nodes attached to the PE/CPE interconnect, for instance to reach the C\
-PE, the ndproxy host or).25 F(other hosts attached to this layer)122 444
-Q(-2 interconnect.)-.2 E 1.612(The tar)102 462 R 1.612(get addresses \
+PE, the ndproxy host or).25 F(other hosts attached to this layer)122 402
+Q(-2 interconnect.)-.2 E 1.612(The tar)102 420 R 1.612(get addresses \
 \214lled in those solicitations that ndproxy must ignore ha)-.18 F 1.913
 -.15(ve t)-.2 H 4.113(ob).15 G 4.113(ed)-4.113 G 1.613
-(eclared via sysctl)-4.113 F(\(net.inet6.ndproxyconf_e)102 474 Q 1.338(\
+(eclared via sysctl)-4.113 F(\(net.inet6.ndproxyconf_e)102 432 Q 1.338(\
 xception_ipv6_addresses\). This list must contain the link-local and gl\
-obal-scoped)-.15 F .432(unicast and an)102 486 R .432
+obal-scoped)-.15 F .432(unicast and an)102 444 R .432
 (ycast addresses of the CPE, of the ndproxy host and of an)-.15 F 2.932
 (yo)-.15 G .432(ther host than the PE attached to)-2.932 F
-(the PE/CPE interconnect.)102 498 Q -.15(Fa)102 516 S .241(iling to mai\
+(the PE/CPE interconnect.)102 456 Q -.15(Fa)102 474 S .241(iling to mai\
 ntain this list correctly could lead to badly redirect some pack).15 F
-.241(ets to the CPE, b)-.1 F .241(ut with a simple)-.2 F(netw)102 528 Q
+.241(ets to the CPE, b)-.1 F .241(ut with a simple)-.2 F(netw)102 486 Q
 (ork design, this list can be let empty)-.1 E(.)-.65 E F1 1.666
-(UPLINK R)72 552 R 1.666(OUTER ADDRESSES)-.3 F F0 2.169
-(ndproxy only handles pack)102 564 R 2.169
+(UPLINK R)72 510 R 1.666(OUTER ADDRESSES)-.3 F F0 2.169
+(ndproxy only handles pack)102 522 R 2.169
 (ets originating from one of the PE addresses.)-.1 F 2.17
-(During its address resolution)7.17 F 1.327(process, dif)102 576 R 1.327
+(During its address resolution)7.17 F 1.327(process, dif)102 534 R 1.327
 (ferent source addresses can be choosen by the PE, depending on the pac\
 k)-.25 F 1.326(et that triggered the)-.1 F
-(process or depending on other e)102 588 Q(xternal constraints.)-.15 E
-(Here are some cases when it can occur:)102 606 Q 10(1. The)102 624 R
+(process or depending on other e)102 546 Q(xternal constraints.)-.15 E
+(Here are some cases when it can occur:)102 564 Q 10(1. The)102 582 R
 (PE may ha)2.5 E .3 -.15(ve m)-.2 H(ultiple interf).15 E(aces;)-.1 E 10
-(2. There)102 642 R(may be multiple PE;)2.5 E 10(3. Man)102 660 R 4.469
+(2. There)102 600 R(may be multiple PE;)2.5 E 10(3. Man)102 618 R 4.469
 (yr)-.15 G 1.969(outers choose to use a link-local address when sending\
  neighbor solicitations, b)-4.469 F 1.97(ut when an)-.2 F 1.408
-(administrator of such a router)122 672 R 3.908(,a)-.4 G 1.408(lso ha)
+(administrator of such a router)122 630 R 3.908(,a)-.4 G 1.408(lso ha)
 -3.908 F 1.407
 (ving a global address assigned on the same link, tries to send)-.2 F
-(pack)122 684 Q .861(ets \(echo request, for instance\) to an on-link d\
+(pack)122 642 Q .861(ets \(echo request, for instance\) to an on-link d\
 estination global address, the source address of the)-.1 F 1.163
-(echo request pack)122 696 R 1.162(et prompting the solicitation may be\
+(echo request pack)122 654 R 1.162(et prompting the solicitation may be\
  global-scoped according to the selection algo-)-.1 F .435(rithm descri\
 bed in RFC-6724. Therefore, the source address of the Neighbor Solicita\
-tion pack)122 708 R .436(et should)-.1 F(FreeBSD 10.1)72 756 Q
-(March 30, 2015)144.98 E(3)197.2 E 0 Cg EP
+tion pack)122 666 R .436(et should)-.1 F
+(also be selected in the same global scope, according to RFC-4861;)122
+678 Q(FreeBSD 10.3)72 750 Q(May 27, 2017)148.865 E(3)201.085 E 0 Cg EP
 %%Page: 4 4
 %%BeginPageSetup
 BP
 %%EndPageSetup
 /F0 10/Times-Roman@0 SF(NDPR)72 48 Q -.4(OX)-.4 G 1.666(Y\().4 G 99.869
 (4\) FreeBSD)-1.666 F -.25(Ke)2.5 G(rnel Interf).25 E(aces Manual)-.1 E
-(NDPR)102.369 E -.4(OX)-.4 G 1.666(Y\().4 G(4\))-1.666 E
-(also be selected in the same global scope, according to RFC-4861;)122
-96 Q 10(4. When)102 114 R .422(the uplink router does not yet kno)2.922
-F 2.922(wi)-.25 G .422(ts o)-2.922 F .422
+(NDPR)102.369 E -.4(OX)-.4 G 1.666(Y\().4 G(4\))-1.666 E 10(4. When)102
+96 R .422(the uplink router does not yet kno)2.922 F 2.922(wi)-.25 G
+.422(ts o)-2.922 F .422
 (wn address, it must use the unspeci\214ed address, accord-)-.25 F
-(ing to RFC-4861.)122 126 Q .009
-(So, it can not be assumed that an uplink router will al)102 144 R -.1
+(ing to RFC-4861.)122 108 Q .009
+(So, it can not be assumed that an uplink router will al)102 126 R -.1
 (wa)-.1 G .01(ys use the same IPv6 address to send neighbor solici-).1 F
-.13(tations. Ev)102 156 R .13(ery assigned address that can be used as \
+.13(tations. Ev)102 138 R .13(ery assigned address that can be used as \
 a source address by the PE on its do)-.15 F .129(wnlink interf)-.25 F
 .129(ace must)-.1 F(then be declared to ndproxy via sysctl \(net.inet6.\
-ndproxyconf_uplink_ipv6_addresses\).)102 168 Q
-(ndproxy will only handle pack)102 186 Q
-(ets that come from one of these addresses.)-.1 E 2.6(As)102 204 S .1
+ndproxyconf_uplink_ipv6_addresses\).)102 150 Q
+(ndproxy will only handle pack)102 168 Q
+(ets that come from one of these addresses.)-.1 E 2.6(As)102 186 S .1
 (pecial care must be tak)-2.6 F .101(en about the unsolicited address. \
 It may be used by the PE, then it is part of the list)-.1 F .085(of PE \
 addresses and should therefore be added to the list of PE addresses. Si\
-nce this address can also be used)102 216 R .405(by other nodes during \
-some initialization steps \(for instance when hot-sw)102 228 R .405
+nce this address can also be used)102 198 R .405(by other nodes during \
+some initialization steps \(for instance when hot-sw)102 210 R .405
 (apping an Ethernet board\), another)-.1 F .669(node could use this add\
 ress to send neighbor solicitations that ndproxy should not handle, bec\
-ause the)102 240 R 3.168(ya)-.15 G(re)-3.168 E .388
-(not sent by the PE. In f)102 252 R .388
+ause the)102 222 R 3.168(ya)-.15 G(re)-3.168 E .388
+(not sent by the PE. In f)102 234 R .388
 (act, this is not a problem because the tar)-.1 F .389
 (get address option contained in a solicitation)-.18 F .733
-(from this other node should be in the e)102 264 R .732
+(from this other node should be in the e)102 246 R .732
 (xception list. So, adding the unsolicited address in the PE addresses)
--.15 F(list should be safe.)102 276 Q -.15(Fa)102 294 S .793(iling to m\
+-.15 F(list should be safe.)102 258 Q -.15(Fa)102 276 S .793(iling to m\
 aintain this list correctly could lead the PE not to be able to establi\
 sh outbound connections to).15 F .319
-(nodes on the PE/CPE interconnect, b)102 306 R .319(ut if this list con\
+(nodes on the PE/CPE interconnect, b)102 288 R .319(ut if this list con\
 tains at least the PE link-local address, IPv6 connecti)-.2 F(v-)-.25 E
 (ity should be correctly established between the Internet and the inter\
-nal subscriber')102 318 Q 2.5(ss)-.55 G(ubnets.)-2.5 E/F1 10
-/Times-Bold@0 SF(CONFIGURA)72 342 Q(TION)-.95 E F0
-(The sysctl utility is used to set ndproxy con\214guration parameters.)
-102 354 Q 1.6 -.8(To l)102 372 T
-(oad these parameters at boot time, place the corresponding entries in)
-.8 E/F2 10/Courier@0 SF(sysctl.conf)2.5 E F0(\(5\).)A .592
-(An IPv6 address can be an)102 390 R 3.092(yv)-.15 G .592(alid te)-3.342
+nal subscriber')102 300 Q 2.5(ss)-.55 G(ubnets.)-2.5 E/F1 10
+/Times-Bold@0 SF(CONFIGURA)72 324 Q(TION)-.95 E F0 .592
+(An IPv6 address can be an)102 336 R 3.092(yv)-.15 G .592(alid te)-3.342
 F .592
 (xtual representation according to RFC-4291 and RFC-5952 \(this means)
--.15 F .792(that transitional te)102 402 R .792
+-.15 F .792(that transitional te)102 348 R .792
 (xtual representation is fully supported\).)-.15 F .791
 (Other representations will trigger an error e)5.792 F -.15(ve)-.25 G
 (nt.).15 E(IPv6 address lists must be formated as series of IPv6 adress\
-es separated by semi-colons.)102 414 Q F1(net.inet6.ndpr)102 432 Q
-(oxyconf_uplink_interface)-.18 E F0 .786(Name of the interf)167 450 R
-.786(ace talking to the broadcast multi-access netw)-.1 F .786
-(ork connecting the PE and)-.1 F(CPE routers.)167 462 Q
-(Example: "vlan2".)167 480 Q F1(net.inet6.ndpr)102 498 Q(oxyconf_do)-.18
-E(wnlink_mac_addr)-.1 E(ess)-.18 E F0(MA)167 516 Q 2.538(Ca)-.4 G .037
+es separated by semi-colons.)102 360 Q(The sysctl utility or)102 378 Q
+/F2 10/Courier@0 SF(rc.conf)2.5 E F0
+(\(5\) are used to set ndproxy con\214guration parameters.)A .364
+(If you ha)102 396 R .664 -.15(ve i)-.2 H .365
+(nstalled ndproxy as a port or as a package, set the follo).15 F .365
+(wing v)-.25 F .365(ariables in)-.25 F F2(rc.conf)2.865 E F0 .365
+(\(5\) and load)B(the module at boot time by placing the follo)102 408 Q
+(wing line in)-.25 E F2(rc.conf)2.5 E F0(\(5\):)A F2
+(ndproxy_enable="YES")132 426 Q F0 .105(On the contrary)102 444 R 2.605
+(,i)-.65 G 2.605(fy)-2.605 G .105(ou ha)-2.605 F .405 -.15(ve N)-.2 H
+.905 -.4(OT i).15 H .105(nstalled ndproxy as a port or as a package b).4
+F .105(ut as a standalone distrib)-.2 F(ution,)-.2 E .314
+(place the sysctl entries in)102 456 R F2(sysctl.conf)2.814 E F0 .314
+(\(5\) and load the module at boot time by placing the follo)B .315
+(wing line)-.25 F(in)102 468 Q F2(loader.conf)2.5 E F0(\(5\):)A F2
+(ndproxy_load="YES")132 486 Q F1(net.inet6.ndpr)102 504 Q
+(oxyconf_uplink_interface sysctl entry or ndpr)-.18 E
+(oxy_uplink_interface r)-.18 E(c.conf v)-.18 E(ariable:)-.1 E F0 .787
+(Name of the interf)167 522 R .786
+(ace talking to the broadcast multi-access netw)-.1 F .786
+(ork connecting the PE and)-.1 F(CPE routers.)167 534 Q
+(Example: "vlan2".)167 552 Q F1(net.inet6.ndpr)102 570 Q(oxyconf_do)-.18
+E(wnlink_mac_addr)-.1 E .04(ess sysctl entry or ndpr)-.18 F(oxy_do)-.18
+E(wnlink_mac_addr)-.1 E .04(ess r)-.18 F(c.conf)-.18 E -.1(va)167 582 S
+(riable:).1 E F0(MA)167 600 Q 2.538(Ca)-.4 G .037
 (ddress of the CPE router)-2.538 F 2.537(.N)-.55 G .037(eighbor adv)
 -2.537 F .037(ertisements sent by ndproxy will be \214lled with)-.15 F
-.374(this address in the tar)167 528 R .375
+.374(this address in the tar)167 612 R .375
 (get link-layer address option. The format of this parameter is the he)
 -.18 F(xa-)-.15 E(decimal representation made of 6 groups of 2 he)167
-540 Q(xadecimal numbers separated by colons.)-.15 E
-(Example: "00:0C:29:B6:43:D5".)167 558 Q F1(net.inet6.ndpr)102 576 Q
-(oxyconf_exception_ipv6_addr)-.18 E(esses)-.18 E F0 -.8(Ta)167 594 S
--.18(rg).8 G .189(et addresses not to proxy).18 F 2.689(.I)-.65 G 2.689
-(nas)-2.689 G .189(imple netw)-2.689 F .189
-(ork design, this list can be let empty)-.1 F 2.688(.S)-.65 G .188
-(ee sec-)-2.688 F(tion "EXCEPTION ADDRESSES".)167 606 Q
-(Example: "fe80::20d:edf)167 624 Q(f:fe7b:68b7;fe80::222:15f)-.25 E
-(f:fe3b:59a".)-.25 E F1(net.inet6.ndpr)102 642 Q
-(oxyconf_uplink_ipv6_addr)-.18 E(esses)-.18 E F0 .702(Addresses of the \
-PE. This list should at least contain the PE link-local address. See se\
-ction)167 660 R("UPLINK R)167 672 Q(OUTER ADDRESSES".)-.4 E
-(Example: "fe80::207:cbf)167 690 Q
-(f:fe4b:2d20;2a01:e35:8aae:bc60::1;::".)-.25 E(FreeBSD 10.1)72 750 Q
-(March 30, 2015)144.98 E(4)197.2 E 0 Cg EP
+624 Q(xadecimal numbers separated by colons.)-.15 E
+(Example: "00:0C:29:B6:43:D5".)167 642 Q F1(net.inet6.ndpr)102 660 Q
+(oxyconf_exception_ipv6_addr)-.18 E 3.293(esses sysctl entry or ndpr)
+-.18 F(oxy_exception_ipv6_addr)-.18 E(esses)-.18 E -.18(rc)167 672 S
+(.conf v).18 E(ariable:)-.1 E F0 -.8(Ta)167 690 S -.18(rg).8 G .188
+(et addresses not to proxy).18 F 2.689(.I)-.65 G 2.689(nas)-2.689 G .189
+(imple netw)-2.689 F .189(ork design, this list can be let empty)-.1 F
+2.689(.S)-.65 G .189(ee sec-)-2.689 F(tion "EXCEPTION ADDRESSES".)167
+702 Q(FreeBSD 10.3)72 750 Q(May 27, 2017)148.865 E(4)201.085 E 0 Cg EP
 %%Page: 5 5
 %%BeginPageSetup
 BP
 %%EndPageSetup
 /F0 10/Times-Roman@0 SF(NDPR)72 48 Q -.4(OX)-.4 G 1.666(Y\().4 G 99.869
 (4\) FreeBSD)-1.666 F -.25(Ke)2.5 G(rnel Interf).25 E(aces Manual)-.1 E
-(NDPR)102.369 E -.4(OX)-.4 G 1.666(Y\().4 G(4\))-1.666 E/F1 10
-/Times-Bold@0 SF(net.inet6.ndpr)102 96 Q(oxycount)-.18 E F0
-(Number of adv)167 114 Q(ertisements sent.)-.15 E F1 1.666(SEE ALSO)72
-138 R/F2 10/Courier@0 SF(inet6)102 150 Q F0(\(4\),)A F2(rc.conf)2.5 E F0
-(\(5\),)A F2(loader.conf)2.5 E F0(\(5\),)A F2(sysctl.conf)2.5 E F0
-(\(5\),)A F2(sysctl)2.5 E F0(\(8\),)A F2(loader)2.5 E F0(\(8\),)A F2
-(pfil)2.5 E F0(\(9\))A F1 -.5(AU)72 174 S(THOR).5 E F0(Ale)102 186 Q
-(xandre Fen)-.15 E(yo <ale)-.15 E(x@fen)-.15 E(yo.net> - www)-.15 E
-(.fen)-.65 E(yo.net)-.15 E(FreeBSD 10.1)72 750 Q(March 30, 2015)144.98 E
-(5)197.2 E 0 Cg EP
+(NDPR)102.369 E -.4(OX)-.4 G 1.666(Y\().4 G(4\))-1.666 E
+(Example: "fe80::20d:edf)167 96 Q(f:fe7b:68b7;fe80::222:15f)-.25 E
+(f:fe3b:59a".)-.25 E/F1 10/Times-Bold@0 SF(net.inet6.ndpr)102 114 Q
+(oxyconf_uplink_ipv6_addr)-.18 E 1.328(esses sysctl entry or ndpr)-.18 F
+(oxy_uplink_ipv6_addr)-.18 E 1.328(esses r)-.18 F(c.conf)-.18 E -.1(va)
+167 126 S(riable:).1 E F0 .702(Addresses of the PE. This list should at\
+ least contain the PE link-local address. See section)167 144 R
+("UPLINK R)167 156 Q(OUTER ADDRESSES".)-.4 E(Example: "fe80::207:cbf)167
+174 Q(f:fe4b:2d20;2a01:e35:8aae:bc60::1;::".)-.25 E F1(net.inet6.ndpr)
+102 192 Q(oxycount sysctl entry:)-.18 E F0(Number of adv)167 210 Q
+(ertisements sent.)-.15 E F1 1.666(SEE ALSO)72 234 R/F2 10/Courier@0 SF
+(inet6)102 246 Q F0(\(4\),)A F2(rc.conf)2.5 E F0(\(5\),)A F2
+(loader.conf)2.5 E F0(\(5\),)A F2(sysctl.conf)2.5 E F0(\(5\),)A F2
+(sysctl)2.5 E F0(\(8\),)A F2(loader)2.5 E F0(\(8\),)A F2(pfil)2.5 E F0
+(\(9\))A F1 -.5(AU)72 270 S(THOR).5 E F0(Ale)102 282 Q(xandre Fen)-.15 E
+(yo <ale)-.15 E(x@fen)-.15 E(yo.net> - www)-.15 E(.fen)-.65 E(yo.net)
+-.15 E(FreeBSD 10.3)72 750 Q(May 27, 2017)148.865 E(5)201.085 E 0 Cg EP
 %%Trailer
 end
 %%EOF
