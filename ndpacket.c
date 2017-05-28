@@ -267,11 +267,11 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
 #if (__FreeBSD_version < 1100000)
   ret = in6_selectsrc(&dst_sa, NULL, NULL, NULL, NULL, NULL, &srcaddr);
 #else
-    uint32_t _dst_sa_scopeid;
-    struct in6_addr _dst_sa;
-    in6_splitscope(&dst_sa.sin6_addr, &_dst_sa, &_dst_sa_scopeid);
-    ret = in6_selectsrc_addr(RT_DEFAULT_FIB, &_dst_sa,
-			     _dst_sa_scopeid, packet_ifnet, &srcaddr, NULL);
+  uint32_t _dst_sa_scopeid;
+  struct in6_addr _dst_sa;
+  in6_splitscope(&dst_sa.sin6_addr, &_dst_sa, &_dst_sa_scopeid);
+  ret = in6_selectsrc_addr(RT_DEFAULT_FIB, &_dst_sa,
+			   _dst_sa_scopeid, packet_ifnet, &srcaddr, NULL);
 #endif
   #if (__FreeBSD_version < 1200000)
   if (ret && (ret != EHOSTUNREACH || in6_addrscope(&ip6->ip6_src) == IPV6_ADDR_SCOPE_LINKLOCAL)) {
