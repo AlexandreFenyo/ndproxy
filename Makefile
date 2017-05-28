@@ -2,9 +2,9 @@
 # after having changed "#include" statements, call 'rm .depends; make depend' to create a new dependencies file
 
 # compile without debug informations on console and without debugging symbols:
-#   make
+#   make clean && make
 # compile with debug informations on console:
-#   make DEBUG_FLAGS=-DDEBUG_NDPROXY
+#   make clean && make DEBUG_FLAGS=-DDEBUG_NDPROXY
 
 # use load & unload predefined targets to load & unload the module:
 #   make load
