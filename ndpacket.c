@@ -85,7 +85,7 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
   // handle only packets originating from the uplink interface
   if (strcmp(if_name(packet_ifnet), ndproxy_conf_str_uplink_interface)) {
 #ifdef DEBUG_NDPROXY
-    printf("NDPROXY DEBUG: interface: %s - %d\n", if_name(packet_ifnet), ndproxy_conf_count);
+    printf("NDPROXY DEBUG: packets from uplink interface: %s - %d\n", if_name(packet_ifnet), ndproxy_conf_count);
 #endif
     return 0;
   }
