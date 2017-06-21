@@ -19,7 +19,6 @@ ndproxy_start()
     echo "Starting ndproxy:"
     sysctl net.inet6.ndproxyconf_uplink_interface > /dev/null 2>&1
     if [ $? -eq 1 ]; then
-	kldconfig -mf %%PREFIX%%/lib/ndproxy
 	kldload ndproxy > /dev/null 2>&1
 	if [ $? -eq 1 ]; then
 	    echo Failure loading ndproxy.
@@ -67,7 +66,6 @@ ndproxy_stop()
     if [ $? -eq 1 ]; then
 	echo Failure unloading ndproxy.
     else
-	kldconfig -mf %%PREFIX%%/lib/ndproxy
 	kldunload ndproxy > /dev/null 2>&1
 	if [ $? -eq 1 ]; then
 	    echo Failure unloading ndproxy.
