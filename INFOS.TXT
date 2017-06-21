@@ -39,6 +39,8 @@ sync with GitHub, as user:
   git add -A
   git commit -m new
   git push
+create shell archive:
+  ( cd usr/ports/net ; shar `find . -print` > /tmp/ndproxy.shar )
 
 ------------------------------------------------------------
 
