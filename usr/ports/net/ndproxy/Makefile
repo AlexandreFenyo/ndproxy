@@ -21,8 +21,6 @@ PLIST_FILES=	${KMODDIR}/${PORTNAME}.ko man/man4/${PORTNAME}.4.gz
 
 USES=		kmod
 
-INSTALL_TARGET=	install-strip
-
 pre-build:
 	(cd ${BUILD_WRKSRC}; ${MAKE} depend)
 
