@@ -5,6 +5,10 @@ READ INSTALL.TXT to install ndproxy
 
 publishing ndproxy on GitHub:
 
+update PLIST_FILES in usr/ports/net/ndproxy/Makefile
+apply section "Testing the Port" at https://www.freebsd.org/doc/en/books/porters-handbook/book.html
+check consistency:
+  portlint -AC usr/ports/net/ndproxy
 clean-up everything, as user:
   make clean
 clean-up everything in port distribution, as root:

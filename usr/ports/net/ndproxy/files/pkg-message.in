@@ -4,7 +4,7 @@ IMPORTANT! MAKE SURE TO READ THE FOLLOWING!
 Please remember to reinstall this port after kernel source update.
 
 ndproxy is configured using four sysctl kernel states. The boot script
-(/usr/local/etc/rc.d/ndproxy) can set those states using rc.conf variables.
+(%%PREFIX%%/etc/rc.d/ndproxy) can set those states using rc.conf variables.
 
 Here is the corresponding rc.conf variable to each sysctl kernel state:
 
