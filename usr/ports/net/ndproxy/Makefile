@@ -17,16 +17,17 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	AlexandreFenyo
 GH_TAGNAME=	v${PORTVERSION}
 
-PLIST_FILES=	lib/ndproxy/ndproxy.ko man/man4/ndproxy.4.gz
+PLIST_FILES=	${KMODDIR}/${PORTNAME}.ko man/man4/${PORTNAME}.4.gz
 
 USES=		kmod
+
+INSTALL_TARGET=	install-strip
 
 pre-build:
 	(cd ${BUILD_WRKSRC}; ${MAKE} depend)
 
 do-install:
-	${MKDIR} ${STAGEDIR}${PREFIX}/lib/${PORTNAME}
-	${INSTALL_KLD} ${WRKSRC}/${PORTNAME}.ko ${STAGEDIR}${PREFIX}/lib/${PORTNAME}
+	${INSTALL_KLD} ${WRKSRC}/${PORTNAME}.ko ${STAGEDIR}${KMODDIR}
 	${INSTALL_MAN} ${WRKSRC}/${PORTNAME}.4 ${STAGEDIR}${PREFIX}/man/man4/
 
 .include <bsd.port.mk>
