@@ -2,6 +2,8 @@
 
 Kernel module for FreeBSD that implements IPv6 Neighbor Discovery proxying over Ethernet-like access networks
 
+With this module, your uplink provider continues to see you as a flat network, but you can subnet your IPv6 prefix and route packets to your preferred gateway, that will split your network into several subnets.
+
 Tested with success on FreeBSD 10.x, FreeBSD 11.x and CURRENT (FreeBSD 12)
 
 ![network architecture](https://raw.githubusercontent.com/AlexandreFenyo/ndproxy/master/network-architecture.png)
