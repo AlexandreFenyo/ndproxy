@@ -452,5 +452,7 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
 #endif
 
   // do not process this packet by upper layers to avoid sending another advertissement
+  m_freem(m);
+  *packet_mp = NULL;
   return 1;
 }
