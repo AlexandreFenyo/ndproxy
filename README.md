@@ -212,7 +212,7 @@ UPLINK ROUTER ADDRESSES
           use the unspecified address, according to RFC-4861.
 
      So, it can not be assumed that an uplink router will always use the same
-     IPv6 address to send neighbor solicitations. Every assigned address that
+     IPv6 address to send neighbor solicitations. Each assigned address that
      can be used as a source address by the PE on its downlink interface must
      then be declared to ndproxy via sysctl (net.inet6.ndproxy-
      conf_uplink_ipv6_addresses).
