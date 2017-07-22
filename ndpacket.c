@@ -437,7 +437,6 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
     printf("NDPROXY DEBUG: can not send packet (err=%d)\n", ret);
 #ifdef DEBUG_NDPROXY
     kdb_backtrace();
-    m_freem(mreply);
     return 0;
 #endif
   } else {
