@@ -254,7 +254,7 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
 #endif
   if (ret && (ret != EHOSTUNREACH || in6_addrscope(&ip6_src) == IPV6_ADDR_SCOPE_LINKLOCAL)) {
     printf("NDPROXY ERROR: can not select a source address to reply (err=%d), source scope is %x\n",
-	   ret, in6_addrscope(&ip6_src));
+	   ret, in6_addrscope(&ip6->ip6_src));
     m_freem(mreply);
     return 0;
   }
