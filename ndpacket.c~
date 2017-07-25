@@ -81,7 +81,6 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
 
   // locate start of IPv6 header data
   ip6 = mtod(m, struct ip6_hdr *);
-  struct in6_addr ip6_src = ip6->ip6_src;
 
   // handle only packets originating from the uplink interface
   if (strcmp(if_name(packet_ifnet), ndproxy_conf_str_uplink_interface)) {
@@ -116,15 +115,27 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
     printf("NDPROXY INFO: compare: ");
     printf_ip6addr(ndproxy_conf_uplink_ipv6_addresses + i, false);
     printf(" (uplink router address) with ");
-    printf_ip6addr(&ip6_src, false);
+    #if (__FreeBSD_version < 1200000)
+    printf_ip6addr(&ip6->ip6_src, false);
+    #else
+    printf_ip6addr((struct in6_addr *) (void *) &ip6->ip6_src, false);
+    #endif
     printf(" (source address)\n");
 #endif
-    if (IN6_ARE_ADDR_EQUAL(ndproxy_conf_uplink_ipv6_addresses + i, &ip6_src)) break;
+    #if (__FreeBSD_version < 1200000)
+    if (IN6_ARE_ADDR_EQUAL(ndproxy_conf_uplink_ipv6_addresses + i, &ip6->ip6_src)) break;
+    #else
+    if (IN6_ARE_ADDR_EQUAL(ndproxy_conf_uplink_ipv6_addresses + i, (struct in6_addr *) (void *) &ip6->ip6_src)) break;
+    #endif
   }
   if (i == ndproxy_conf_uplink_ipv6_naddresses) {
 #ifdef DEBUG_NDPROXY
     printf("NDPROXY INFO: not from uplink router - from: ");
-    printf_ip6addr(&ip6_src, false);
+    #if (__FreeBSD_version < 1200000)
+    printf_ip6addr(&ip6->ip6_src, false);
+    #else
+    printf_ip6addr((struct in6_addr *) (void *) &ip6->ip6_src, false);
+    #endif
     printf(" - %d\n", ndproxy_conf_count);
 #endif
     return 0;
@@ -171,7 +182,11 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
   if (icmp6->icmp6_type != ND_NEIGHBOR_SOLICIT || icmp6->icmp6_code) return 0;
 #ifdef DEBUG_NDPROXY
   printf("NDPROXY DEBUG: got neighbor solicitation from ");
-  printf_ip6addr(&ip6_src, true);
+  #if (__FreeBSD_version < 1200000)
+  printf_ip6addr(&ip6->ip6_src, true);
+  #else
+  printf_ip6addr((struct in6_addr *) (void *) &ip6->ip6_src, true);
+  #endif
   printf("\n");
 #endif
 
@@ -218,7 +233,11 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
   // According to RFC-4861 (§7.2.4), "The Target Address of the advertisement is copied from the Target Address
   // of the solicitation. [...] If the source of the solicitation is the unspecified address, the
   // node MUST [...] multicast the advertisement to the all-nodes address.".
-  if (!IN6_IS_ADDR_UNSPECIFIED(&ip6_src)) dstaddr = ip6->ip6_src;
+  #if (__FreeBSD_version < 1200000)
+  if (!IN6_IS_ADDR_UNSPECIFIED(&ip6->ip6_src)) dstaddr = ip6->ip6_src;
+  #else
+  if (!IN6_IS_ADDR_UNSPECIFIED((struct in6_addr *) (void *) &ip6->ip6_src)) dstaddr = ip6->ip6_src;
+  #endif
   else {
     // Check compliance to RFC-4861: "If the IP source address is the unspecified address, the IP
     // destination address is a solicited-node multicast address.".
@@ -254,9 +273,15 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
   ret = in6_selectsrc_addr(RT_DEFAULT_FIB, &_dst_sa,
 			   _dst_sa_scopeid, packet_ifnet, &srcaddr, NULL);
 #endif
-  if (ret && (ret != EHOSTUNREACH || in6_addrscope(&ip6_src) == IPV6_ADDR_SCOPE_LINKLOCAL)) {
+  #if (__FreeBSD_version < 1200000)
+  if (ret && (ret != EHOSTUNREACH || in6_addrscope(&ip6->ip6_src) == IPV6_ADDR_SCOPE_LINKLOCAL)) {
     printf("NDPROXY ERROR: can not select a source address to reply (err=%d), source scope is %x\n",
 	   ret, in6_addrscope(&ip6->ip6_src));
+  #else
+  if (ret && (ret != EHOSTUNREACH || in6_addrscope((struct in6_addr *) (void *) &ip6->ip6_src) == IPV6_ADDR_SCOPE_LINKLOCAL)) {
+    printf("NDPROXY ERROR: can not select a source address to reply (err=%d), source scope is %x\n",
+	   ret, in6_addrscope((struct in6_addr *) (void *) &ip6->ip6_src));
+  #endif
     m_freem(mreply);
     return 0;
   }
@@ -296,7 +321,6 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
 #endif
 
   struct nd_neighbor_solicit *nd_ns = (struct nd_neighbor_solicit *) (ip6 + 1);
-  struct in6_addr nd_ns_target = nd_ns->nd_ns_target;
 
   // fill in the IPv6 header
   ip6reply = mtod(mreply, struct ip6_hdr *);
@@ -317,7 +341,11 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
   nd_na->nd_na_flags_reserved = 0;
   // According to RFC-4861 (§7.2.4), "If the source of the solicitation is the unspecified address, the
   // node MUST set the Solicited flag to zero [...]"
-  if (!IN6_IS_ADDR_UNSPECIFIED(&ip6_src)) nd_na->nd_na_flags_reserved = ND_NA_FLAG_SOLICITED;
+  #if (__FreeBSD_version < 1200000)
+  if (!IN6_IS_ADDR_UNSPECIFIED(&ip6->ip6_src)) nd_na->nd_na_flags_reserved = ND_NA_FLAG_SOLICITED;
+  #else
+  if (!IN6_IS_ADDR_UNSPECIFIED((struct in6_addr *) (void *) &ip6->ip6_src)) nd_na->nd_na_flags_reserved = ND_NA_FLAG_SOLICITED;
+  #endif
 
   // According to RFC-4861 (§7.2.4), "If the Target Address is either an anycast address or a unicast
   // address for which the node is providing proxy service, [...] the Override flag SHOULD
@@ -327,7 +355,11 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
   nd_na->nd_na_flags_reserved |= ND_NA_FLAG_ROUTER;
 
   // according to RFC-4861 (§7.2.3), the target address can not be a multicast address
-  if (IN6_IS_ADDR_MULTICAST(&nd_ns_target)) {
+  #if (__FreeBSD_version < 1200000)
+  if (IN6_IS_ADDR_MULTICAST(&nd_ns->nd_ns_target)) {
+  #else
+  if (IN6_IS_ADDR_MULTICAST((struct in6_addr *) (void *) &nd_ns->nd_ns_target)) {
+  #endif
     printf("NDPROXY WARNING: rejecting multicast target address\n");
     m_freem(mreply);
     return 0;
@@ -335,11 +367,14 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
 
   // we send a solicited neighbor advertisement relative to the target contained in the received neighbor solicitation
   nd_na->nd_na_target = nd_ns->nd_ns_target;
-  struct in6_addr nd_na_target = nd_na->nd_na_target;
 
   // do not manage packets relative to exception target addresses
   for (i = 0; i < ndproxy_conf_exception_ipv6_naddresses; i++)
-    if (IN6_ARE_ADDR_EQUAL(ndproxy_conf_exception_ipv6_addresses + i, &nd_na_target)) {
+    #if (__FreeBSD_version < 1200000)
+    if (IN6_ARE_ADDR_EQUAL(ndproxy_conf_exception_ipv6_addresses + i, &nd_na->nd_na_target)) {
+    #else
+    if (IN6_ARE_ADDR_EQUAL(ndproxy_conf_exception_ipv6_addresses + i, (struct in6_addr *) (void *) &nd_na->nd_na_target)) {
+    #endif
 #ifdef DEBUG_NDPROXY
       printf("NDPROXY INFO: rejecting target\n");
 #endif
@@ -350,7 +385,11 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
       printf("NDPROXY INFO: accepting target: ");
       printf_ip6addr(ndproxy_conf_exception_ipv6_addresses + i, false);
       printf(" - ");
-      printf_ip6addr(&nd_na_target, false);
+      #if (__FreeBSD_version < 1200000)
+      printf_ip6addr(&nd_na->nd_na_target, false);
+      #else
+      printf_ip6addr((struct in6_addr *) (void *) &nd_na->nd_na_target, false);
+      #endif
       printf("\n");
 #endif
     }
@@ -376,10 +415,13 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
 				 mreply->m_len - sizeof(struct ip6_hdr));
 
 #ifdef DEBUG_NDPROXY
-  struct in6_addr ip6reply_ip6_src = ip6reply->ip6_src;
-  struct in6_addr ip6reply_ip6_dst = ip6reply->ip6_dst;
-  printf("NDPROXY DEBUG: src="); printf_ip6addr(&ip6reply_ip6_src, false); printf(" / ");
-  printf("dst="); printf_ip6addr(&ip6reply_ip6_dst, false); printf("\n");
+  #if (__FreeBSD_version < 1200000)
+  printf("NDPROXY DEBUG: src="); printf_ip6addr(&ip6reply->ip6_src, false); printf(" / ");
+  printf("dst="); printf_ip6addr(&ip6reply->ip6_dst, false); printf("\n");
+  #else
+  printf("NDPROXY DEBUG: src="); printf_ip6addr((struct in6_addr *) (void *) &ip6reply->ip6_src, false); printf(" / ");
+  printf("dst="); printf_ip6addr((struct in6_addr *) (void *) &ip6reply->ip6_dst, false); printf("\n");
+  #endif
 #endif
 
   struct ip6_moptions im6o;
