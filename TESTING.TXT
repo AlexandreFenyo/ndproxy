@@ -29,3 +29,43 @@ unit testing from the host (W7):
     netsh interface ipv6 show neig
     and find fe80::1:1:1:3%28
 
+------------------------------------------------------------
+
+Testing with poudriere on AWS
+create an EC2 instance of a FreeBSD version newer than the latest poudriere target to test
+add a ZFS volume dedicated to poudriere
+add DEVELOPER=yes to /etc/make.conf
+zpool create ztank /dev/xbd1
+update /usr/local/etc/poudriere.conf:
+root@ip-172-30-1-13:/usr/local/etc # diff poudriere.conf poudriere.conf.orig
+  12c12
+  < ZPOOL=ztank
+  ---
+  > #ZPOOL=tank
+  30c30
+  < FREEBSD_HOST=ftp://ftp.freebsd.org
+  ---
+  > FREEBSD_HOST=_PROTO_://_CHANGE_THIS_
+  48c48
+  < USE_PORTLINT=yes
+  ---
+  > USE_PORTLINT=no
+  82c82
+  < DISTFILES_CACHE=/root/distfiles
+  ---
+  > DISTFILES_CACHE=/usr/ports/distfiles
+mkdir /root/distfiles
+portsnap fetch
+portsnap extract
+cp -rp /usr/ports /root/ports
+poudriere ports -c -F -f none -M /root/ports -p local
+sh ndproxy.shar
+mv ndproxy /root/ports/net/ndproxy
+poudriere jail -c -j 111amd64 -v 11.1-RELEASE -a amd64
+poudriere jail -c -j 111i386 -v 11.1-RELEASE -a i386
+poudriere jail -c -j 12amd64 -v head -a amd64 -m svn+https
+poudriere jail -c -j 12i386 -v head -a i386 -m svn+https
+poudriere testport -j 111amd64 -p local -o net/ndproxy
+poudriere testport -j 111i386 -p local -o net/ndproxy
+poudriere testport -j 12amd64 -p local -o net/ndproxy
+poudriere testport -j 12i386 -p local -o net/ndproxy
