@@ -69,3 +69,7 @@ poudriere testport -j 111amd64 -p local -o net/ndproxy
 poudriere testport -j 111i386 -p local -o net/ndproxy
 poudriere testport -j 12amd64 -p local -o net/ndproxy
 poudriere testport -j 12i386 -p local -o net/ndproxy
+
+For CURRENT, the jail version must be less recent than the host one (see uname -a to get the host svn revision version):
+- install a host using a source tree with svn co -r 321619 https://svn.freebsd.org/base/head src
+- or (faster) install a jail like that: poudriere jail -c -j 12amd64 -v head@321619 -a amd64 -m svn+https
