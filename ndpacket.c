@@ -228,7 +228,7 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
       printf("NDPROXY DEBUG: unspecified source address and solicited-node multicast destination address\n");
 #endif
     } else {
-      printf("NDPROXY ERROR: destination address should be a solicited multicast can not set source scope id (err=%d)\n", ret);
+      printf("NDPROXY ERROR: destination address should be a solicited-node multicast address\n");
       m_freem(mreply);
       return 0;
     }
