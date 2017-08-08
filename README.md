@@ -2,6 +2,8 @@
 
 From 2017-08, ndproxy is made available from the official FreeBSD ports tree: [ndproxy port at FreeBSD](https://www.freshports.org/net/ndproxy/)
 
+This way, you can get precompiled packages for many hardware targets, or install it from the  sources, while maintaining dependencies. The port is based on this GitHub source repository content.
+
 # ndproxy
 
 Kernel module for FreeBSD that implements IPv6 Neighbor Discovery proxying over Ethernet-like access networks
