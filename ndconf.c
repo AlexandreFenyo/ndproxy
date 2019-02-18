@@ -27,6 +27,7 @@
 #include <sys/param.h>
 #include <sys/socket.h>
 #include <net/if.h>
+#include <net/pfil.h>
 #include <net/ethernet.h>
 #include <netinet/in.h>
 

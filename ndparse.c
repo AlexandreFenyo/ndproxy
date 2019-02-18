@@ -29,6 +29,7 @@
 #include <sys/socket.h>
 #include <sys/ctype.h>
 #include <net/if.h>
+#include <net/pfil.h>
 #include <net/ethernet.h>
 #include <netinet/in.h>
 #include <netinet6/scope6_var.h>

@@ -28,6 +28,7 @@
 #include <sys/socket.h>
 #include <sys/kdb.h>
 #include <net/if.h>
+#include <net/pfil.h>
 #include <net/if_var.h>
 #include <net/ethernet.h>
 #include <netinet/in.h>
@@ -57,10 +58,10 @@
 // each switch, but only on the corresponding vlan.
 
 // called by pfil_run_hooks() @ ip6_input.c:ip_input()
+
 #ifdef PFIL_VERSION
-pfil_return_t packet(pfil_packet_t mbufp, struct ifnet *packet_ifnet,
+pfil_return_t packet(struct mbuf **packet_mp, struct ifnet *packet_ifnet,
                      const int packet_dir, void *packet_arg, struct inpcb *packet_inpcb) {
-  struct mbuf **packet_mp = mbufp.m;
 #else
 int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet,
            const int packet_dir, struct inpcb *packet_inpcb) {

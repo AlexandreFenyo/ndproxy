@@ -28,7 +28,7 @@
 #define __NDPACKET_H
 
 #ifdef PFIL_VERSION
-extern pfil_return_t packet(pfil_packet_t, struct ifnet *, int, void *, struct inpcb *);
+extern pfil_return_t packet(struct mbuf **m, struct ifnet *, int, void *, struct inpcb *);
 #else
 extern int packet(void *, struct mbuf **, struct ifnet *, int, struct inpcb *);
 #endif
