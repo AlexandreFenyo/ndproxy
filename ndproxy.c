@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2015-2017 Alexandre Fenyo <alex@fenyo.net> - http://www.fenyo.net
+ * Copyright (c) 2015-2019 Alexandre Fenyo <alex@fenyo.net> - http://www.fenyo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
