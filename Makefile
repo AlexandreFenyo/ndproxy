@@ -22,6 +22,9 @@
 # declare name of kernel module
 KMOD    =  ndproxy
 
+# build for a kernel with 'options VIMAGE'
+CFLAGS += -DVIMAGE
+
 # enumerate source files for kernel module
 SRCS    = ndproxy.c ndparse.c ndpacket.c ndconf.c
 MAN    += ndproxy.4

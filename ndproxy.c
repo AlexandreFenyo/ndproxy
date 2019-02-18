@@ -39,6 +39,7 @@
 #include <netinet/in.h>
 
 #ifdef PFIL_VERSION
+#include <net/vnet.h>
 #include <netinet6/ip6_var.h>
 #endif
 
