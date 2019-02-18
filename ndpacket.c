@@ -57,8 +57,14 @@
 // each switch, but only on the corresponding vlan.
 
 // called by pfil_run_hooks() @ ip6_input.c:ip_input()
+#ifdef PFIL_VERSION
+pfil_return_t packet(pfil_packet_t mbufp, struct ifnet *packet_ifnet,
+                     const int packet_dir, void *packet_arg, struct inpcb *packet_inpcb) {
+  struct mbuf **packet_mp = mbufp.m;
+#else
 int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet,
-		  const int packet_dir, struct inpcb *packet_inpcb) {
+           const int packet_dir, struct inpcb *packet_inpcb) {
+#endif
   struct mbuf *m = NULL, *mreply = NULL;
   struct ip6_hdr *ip6, *ip6reply;
   struct icmp6_hdr *icmp6;

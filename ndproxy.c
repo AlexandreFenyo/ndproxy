@@ -38,13 +38,53 @@
 #include <net/ethernet.h>
 #include <netinet/in.h>
 
+#ifdef PFIL_VERSION
+#include <netinet6/ip6_var.h>
+#endif
+
 #include "ndproxy.h"
 #include "ndconf.h"
 #include "ndparse.h"
 #include "ndpacket.h"
 
-static struct pfil_head *pfh_inet6 = NULL;
 static int hook_added = false;
+
+#ifdef PFIL_VERSION
+
+static pfil_hook_t pfh_hook;
+
+static void register_hook() {
+  struct pfil_hook_args pha;
+  struct pfil_link_args pla;
+
+  if (hook_added) return;
+
+  pha.pa_version = PFIL_VERSION;
+  pha.pa_type = PFIL_TYPE_IP6;
+  pha.pa_flags = PFIL_IN;
+  pha.pa_modname = "ndproxy";
+  pha.pa_ruleset = NULL;
+  pha.pa_rulname = "default-in6";
+  pha.pa_func = packet;
+  pfh_hook = pfil_add_hook(&pha);
+
+  pla.pa_version = PFIL_VERSION;
+  pla.pa_flags = PFIL_IN | PFIL_HEADPTR | PFIL_HOOKPTR;
+  pla.pa_hook = pfh_hook;
+  pla.pa_head = V_inet6_pfil_head;
+  pfil_link(&pla);
+
+  hook_added = true;
+}
+
+static void unregister_hook() {
+  if (!hook_added) return;
+  pfil_remove_hook(pfh_hook);
+}
+
+#else
+
+static struct pfil_head *pfh_inet6 = NULL;
 
 // when module is loaded from /boot/loader.conf, pfh_inet6 is not already initialized,
 // so postpone registration
@@ -82,6 +122,8 @@ static void unregister_hook() {
 #endif
   }
 }
+
+#endif
 
 // called when the module is loaded or unloaded
 static int event_handler(struct module *module, const int event, void *arg) {
