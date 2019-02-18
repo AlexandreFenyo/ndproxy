@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	ndproxy
-PORTVERSION=	2.0
+PORTVERSION=	3.0.beta
 CATEGORIES=	net
 
 MAINTAINER=	fbsd.bugzilla@fenyo.net
