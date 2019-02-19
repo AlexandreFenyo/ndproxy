@@ -44,6 +44,18 @@ create shell archive:
 
 ------------------------------------------------------------
 
+Creating a release for the FreeBSD ports tree:
+
+git clone --branch v3.2 https://github.com/AlexandreFenyo/ndproxy.git
+cd ndproxy
+( cd usr/ports/net/ndproxy && make makesum )
+( cd usr/ports/net ; shar `find . -print` > /tmp/ndproxy.shar )
+mv /tmp/ndproxy.shar /tmp/ndproxy-v3.2.shar
+
+
+
+------------------------------------------------------------
+
 removing installed manpage:
 rm -f /usr/share/man/man4/ndproxy.4.gz
 rm -f /usr/local/man/man4/ndproxy.4.gz
