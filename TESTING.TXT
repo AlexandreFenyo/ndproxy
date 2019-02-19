@@ -57,19 +57,39 @@ root@ip-172-30-1-13:/usr/local/etc # diff poudriere.conf poudriere.conf.orig
 mkdir /root/distfiles
 portsnap fetch
 portsnap extract
-cp -rp /usr/ports /root/ports
 poudriere ports -c -F -f none -M /root/ports -p local
-sh ndproxy.shar
-mv ndproxy /root/ports/net/ndproxy
-poudriere jail -c -j 111amd64 -v 11.1-RELEASE -a amd64
-poudriere jail -c -j 111i386 -v 11.1-RELEASE -a i386
-poudriere jail -c -j 12amd64 -v head -a amd64 -m svn+https
-poudriere jail -c -j 12i386 -v head -a i386 -m svn+https
-poudriere testport -j 111amd64 -p local -o net/ndproxy
-poudriere testport -j 111i386 -p local -o net/ndproxy
-poudriere testport -j 12amd64 -p local -o net/ndproxy
-poudriere testport -j 12i386 -p local -o net/ndproxy
+cp -rp /usr/ports /root/ports
+rm -rf /root/ports/net/ndproxy
+cd ~/git/ndproxy/usr/ports/net ; shar `find . -print` > /tmp/ndproxy.shar
+cd /root/ports/net/ndproxy
+sh /tmp/ndproxy.shar
 
-For CURRENT, the jail version must be less recent than the host one (see uname -a to get the host svn revision version):
-- install a host using a source tree with svn co -r 321619 https://svn.freebsd.org/base/head src
-- or (faster) install a jail like that: poudriere jail -c -j 12amd64 -v head@321619 -a amd64 -m svn+https
+Creation of jails for poudriere:
+- by the network:
+  poudriere jail -c -j 12amd64 -v head@321619 -a amd64 -m svn+https (uname -a to get the svn release)
+- with a local repository:
+  - repository downloaded with svnlite:
+    mkdir /root/svn
+    cd /root/svn
+    svnlite co -r 344112 https://svn.freebsd.org/base/head src
+    cd src
+    poudriere jail -c -j 13i386 -b -a i386 -m src=/root/svn/src -J 112 >& /tmp/poud-c-13i386.log &
+  - repository downloaded with http:
+    mkdir /root/svn
+    fetch http://ftp.freebsd.org/pub/FreeBSD/releases/amd64/11.1-RELEASE/src.txz
+    unxz src.txz
+    tar xf src.tar
+    poudriere jail -c -j 111i386 -b -a i386 -m src=/root/svn/src -J 112 >& /tmp/poud-c-111i386.log &
+Many jails can be created at the same time: (note that -b means "make build-world")
+poudriere jail -c -j 13amd64 -b -a amd64 -m src=/root/bsd-current/src -J 112 > /tmp/poud-c-13amd64.log &
+poudriere jail -c -j 13i386 -b -a i386 -m src=/root/bsd-current/src -J 112 >& /tmp/poud-c-13i386.log &
+poudriere jail -c -j 12amd64 -b -a amd64 -m src=/root/bsd-12.0/src -J 112 >& /tmp/poud-c-12amd64.log &
+poudriere jail -c -j 12i386 -b -a i386 -m src=/root/bsd-12.0/src -J 112 >& /tmp/poud-c-12i386.log &
+
+Many tests can be done at the same time:
+poudriere testport -j 13amd64 -p local -o net/ndproxy -J 112 > ~/testport-13amd64.log &
+poudriere testport -j 13i386 -p local -o net/ndproxy -J 112 > ~/testport-13i386.log &
+poudriere testport -j 12amd64 -p local -o net/ndproxy -J 112 > ~/testport-12amd64.log &
+poudriere testport -j 12i386 -p local -o net/ndproxy -J 112 > ~/testport-12i386.log &
+
+For CURRENT, the jail version must be less recent than the host one (see uname -a to get the host svn revision version).
