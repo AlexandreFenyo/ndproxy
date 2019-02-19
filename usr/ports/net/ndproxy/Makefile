@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	ndproxy
-PORTVERSION=	3.1
+PORTVERSION=	3.2
 CATEGORIES=	net
 
 MAINTAINER=	fbsd.bugzilla@fenyo.net
@@ -10,9 +10,9 @@ COMMENT=	Implementation of IPv6 Neighbor Discovery proxy
 LICENSE=	BSD2CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-SUB_FILES=	pkg-message
-
 USES=		kmod
+
+SUB_FILES=	pkg-message
 
 USE_RC_SUBR=	ndproxy
 USE_GITHUB=	yes
