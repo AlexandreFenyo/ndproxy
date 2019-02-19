@@ -1,11 +1,11 @@
 %!PS-Adobe-3.0
-%%Creator: groff version 1.19.2
-%%CreationDate: Wed Jul 26 00:56:47 2017
+%%Creator: groff version 1.22.4
+%%CreationDate: Tue Feb 19 01:22:22 2019
 %%DocumentNeededResources: font Times-Roman
 %%+ font Times-Bold
 %%+ font Courier-Bold
 %%+ font Courier
-%%DocumentSuppliedResources: procset grops 1.19 2
+%%DocumentSuppliedResources: procset grops 1.22 4
 %%Pages: 5
 %%PageOrder: Ascend
 %%DocumentMedia: Default 612 792 0 () ()
@@ -15,7 +15,8 @@
 %%PageMedia: Default
 %%EndDefaults
 %%BeginProlog
-%%BeginResource: procset grops 1.19 2
+%%BeginResource: procset grops 1.22 4
+%!PS-Adobe-3.0 Resource-ProcSet
 /setpacking where{
 pop
 currentpacking
@@ -72,6 +73,7 @@ exch pop add exch pop
 /level0 save def
 1 setlinecap
 1 setlinejoin
+DEFS/BPhook known{DEFS begin BPhook end}if
 72 RES div dup scale
 LS{
 90 rotate
@@ -137,7 +139,10 @@ pop
 findfont
 dup maxlength 1 index/FontName known not{1 add}if dict begin
 {
-1 index/FID ne{def}{pop pop}ifelse
+1 index/FID ne
+2 index/UniqueID ne
+and
+{def}{pop pop}ifelse
 }forall
 /Encoding exch def
 dup/FontName exch def
@@ -175,8 +180,10 @@ newpath
 userdict begin
 /showpage{}def
 /setpagedevice{}def
+mark
 }bind def
 /PEND{
+cleartomark
 countdictstack CNT sub{end}repeat
 level1 restore
 }bind def
@@ -186,6 +193,8 @@ pop
 setpacking
 }if
 %%EndResource
+%%EndProlog
+%%BeginSetup
 %%BeginFeature: *PageSize Default
 << /PageSize [ 612 792 ] /ImagingBBox null >> setpagedevice
 %%EndFeature
@@ -223,7 +232,7 @@ def/PL 792 def/LS false def/ENC0[/asciicircum/asciitilde/Scaron/Zcaron
 /ugrave/uacute/ucircumflex/udieresis/yacute/thorn/ydieresis]def
 /Courier@0 ENC0/Courier RE/Courier-Bold@0 ENC0/Courier-Bold RE
 /Times-Bold@0 ENC0/Times-Bold RE/Times-Roman@0 ENC0/Times-Roman RE
-%%EndProlog
+%%EndSetup
 %%Page: 1 1
 %%BeginPageSetup
 BP
@@ -241,9 +250,9 @@ BP
  replies to a neighbor solicitation with a speci\214c neighbor adv)102
 174 Q(ertisement, in order to let the PE uplink)-.15 E
 (router send further pack)102 186 Q(ets to a CPE do)-.1 E(wnlink router)
--.25 E 2.5(,t)-.4 G(hat may or may not be the same node that run)-2.5 E
-(ndproxy)102 198 Q(.)-.65 E(The hook-based)102 216 Q/F3 10/Courier@0 SF
-(pfil)2.5 E F0(\(9\) frame)A -.1(wo)-.25 G
+-.25 E 2.5(,t)-.4 G(hat may or may not be the same node that run nd-)
+-2.5 E(proxy)102 198 Q(.)-.65 E(The hook-based)102 216 Q/F3 10/Courier@0
+SF(pfil)2.5 E F0(\(9\) frame)A -.1(wo)-.25 G
 (rk is used to let ndproxy be in).1 E -.2(vo)-.4 G -.1(ke).2 G 2.5(df).1
 G(or e)-2.5 E -.15(ve)-.25 G(ry IPv6 incoming pack).15 E(et, in)-.1 E(o\
 rder to speci\214cally handle and \214lter neighbor solicitations and r\
@@ -271,14 +280,14 @@ t_rtadv auto_linklocal" to the ifcon\214g_<interf)102 378 Q(ace>_ipv6 v)
 (DIFFERENCES WITH NDP)72 402 R F0 .331(The tar)102 414 R .331
 (get address to proxy must be gi)-.18 F -.15(ve)-.25 G 2.831(nw).15 G
 .331(hen using the)-2.831 F F3(ndp)2.83 E F0 .33
-(\(8\) command-line tool with the proxy option.)B 1.247(On the contrary)
-102 426 R 3.747(,n)-.65 G 1.247(dproxy does not rely on a list of tar)
--3.747 F 1.247(get addresses to proxy)-.18 F 3.747(.T)-.65 G 1.247
-(hus, RFC-4941 temporary)-3.747 F 1.473(addresses can be proxy\214ed. F)
-102 438 R 1.472(or security reasons, man)-.15 F 3.972(yo)-.15 G 1.472
-(perating systems use a temporary address when)-3.972 F
-(establishing outbound connections.)102 450 Q 1.196(When using)102 468 R
-F3(ndp)3.696 E F0 1.196
+(\(8\) command-line tool with the proxy option.)B .329(On the contrary)
+102 426 R 2.829(,n)-.65 G .329(dproxy does not rely on a list of tar)
+-2.829 F .33(get addresses to proxy)-.18 F 2.83(.T)-.65 G .33
+(hus, RFC-4941 temporary ad-)-2.83 F .245(dresses can be proxy\214ed. F)
+102 438 R .245(or security reasons, man)-.15 F 2.745(yo)-.15 G .244
+(perating systems use a temporary address when estab-)-2.745 F
+(lishing outbound connections.)102 450 Q 1.196(When using)102 468 R F3
+(ndp)3.696 E F0 1.196
 (\(8\) command-line tool with the proxy option, the proxy\214ed pack)B
 1.196(ets are redirected to the)-.1 F .572(node that run ndp. W)102 480
 R .572(ith ndproxy)-.4 F 3.072(,t)-.65 G .571
@@ -313,7 +322,7 @@ SP need to support, when the dele)102 570 R -.05(ga)-.15 G .487
 102 660 R 3.309(yo)-.15 G 3.309(ft)-3.309 G .809
 (hose mechanisms or protocols,)-3.309 F(thus not being able to nati)102
 672 Q -.15(ve)-.25 G(ly subnet their IPv6 dele).15 E -.05(ga)-.15 G
-(ted pre\214x.).05 E(FreeBSD 10.3)72 750 Q(May 27, 2017)148.865 E(1)
+(ted pre\214x.).05 E(FreeBSD 13.0)72 750 Q(May 27, 2017)148.865 E(1)
 201.085 E 0 Cg EP
 %%Page: 2 2
 %%BeginPageSetup
@@ -380,7 +389,7 @@ ith the Internet. Using temporary addresses for outbound connections to\
 (xplicitely rejects neighbor solicitation pack)-.15 F 2.412
 (ets containing an)-.1 F 4.911(ye)-.15 G(xtension)-5.061 E(header)102
 684 Q 5(.S)-.55 G(uch a pack)-5 E(et is mainly unattended:)-.1 E
-(FreeBSD 10.3)72 750 Q(May 27, 2017)148.865 E(2)201.085 E 0 Cg EP
+(FreeBSD 13.0)72 750 Q(May 27, 2017)148.865 E(2)201.085 E 0 Cg EP
 %%Page: 3 3
 %%BeginPageSetup
 BP
@@ -433,20 +442,20 @@ k)-.25 F 1.326(et that triggered the)-.1 F
 (process or depending on other e)102 546 Q(xternal constraints.)-.15 E
 (Here are some cases when it can occur:)102 564 Q 10(1. The)102 582 R
 (PE may ha)2.5 E .3 -.15(ve m)-.2 H(ultiple interf).15 E(aces;)-.1 E 10
-(2. There)102 600 R(may be multiple PE;)2.5 E 10(3. Man)102 618 R 4.469
-(yr)-.15 G 1.969(outers choose to use a link-local address when sending\
- neighbor solicitations, b)-4.469 F 1.97(ut when an)-.2 F 1.408
-(administrator of such a router)122 630 R 3.908(,a)-.4 G 1.408(lso ha)
--3.908 F 1.407
-(ving a global address assigned on the same link, tries to send)-.2 F
-(pack)122 642 Q .861(ets \(echo request, for instance\) to an on-link d\
-estination global address, the source address of the)-.1 F 1.163
-(echo request pack)122 654 R 1.162(et prompting the solicitation may be\
- global-scoped according to the selection algo-)-.1 F .435(rithm descri\
-bed in RFC-6724. Therefore, the source address of the Neighbor Solicita\
-tion pack)122 666 R .436(et should)-.1 F
-(also be selected in the same global scope, according to RFC-4861;)122
-678 Q(FreeBSD 10.3)72 750 Q(May 27, 2017)148.865 E(3)201.085 E 0 Cg EP
+(2. There)102 600 R(may be multiple PE;)2.5 E 10(3. Man)102 618 R 3.32
+(yr)-.15 G .82(outers choose to use a link-local address when sending n\
+eighbor solicitations, b)-3.32 F .82(ut when an ad-)-.2 F .055
+(ministrator of such a router)122 630 R 2.555(,a)-.4 G .055(lso ha)
+-2.555 F .054
+(ving a global address assigned on the same link, tries to send pack)-.2
+F(ets)-.1 E .645(\(echo request, for instance\) to an on-link destinati\
+on global address, the source address of the echo re-)122 642 R .82
+(quest pack)122 654 R .819(et prompting the solicitation may be global-\
+scoped according to the selection algorithm de-)-.1 F .623(scribed in R\
+FC-6724. Therefore, the source address of the Neighbor Solicitation pac\
+k)122 666 R .623(et should also be)-.1 F
+(selected in the same global scope, according to RFC-4861;)122 678 Q
+(FreeBSD 13.0)72 750 Q(May 27, 2017)148.865 E(3)201.085 E 0 Cg EP
 %%Page: 4 4
 %%BeginPageSetup
 BP
@@ -531,7 +540,7 @@ E(wnlink_mac_addr)-.1 E .04(ess r)-.18 F(c.conf)-.18 E -.1(va)167 582 S
 (et addresses not to proxy).18 F 2.689(.I)-.65 G 2.689(nas)-2.689 G .189
 (imple netw)-2.689 F .189(ork design, this list can be let empty)-.1 F
 2.689(.S)-.65 G .189(ee sec-)-2.689 F(tion "EXCEPTION ADDRESSES".)167
-702 Q(FreeBSD 10.3)72 750 Q(May 27, 2017)148.865 E(4)201.085 E 0 Cg EP
+702 Q(FreeBSD 13.0)72 750 Q(May 27, 2017)148.865 E(4)201.085 E 0 Cg EP
 %%Page: 5 5
 %%BeginPageSetup
 BP
@@ -554,7 +563,7 @@ BP
 (sysctl)2.5 E F0(\(8\),)A F2(loader)2.5 E F0(\(8\),)A F2(pfil)2.5 E F0
 (\(9\))A F1 -.5(AU)72 270 S(THOR).5 E F0(Ale)102 282 Q(xandre Fen)-.15 E
 (yo <ale)-.15 E(x@fen)-.15 E(yo.net> - www)-.15 E(.fen)-.65 E(yo.net)
--.15 E(FreeBSD 10.3)72 750 Q(May 27, 2017)148.865 E(5)201.085 E 0 Cg EP
+-.15 E(FreeBSD 13.0)72 750 Q(May 27, 2017)148.865 E(5)201.085 E 0 Cg EP
 %%Trailer
 end
 %%EOF

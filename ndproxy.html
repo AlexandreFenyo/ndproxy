@@ -1,5 +1,5 @@
-<!-- Creator     : groff version 1.19.2 -->
-<!-- CreationDate: Wed Jul 26 00:56:48 2017 -->
+<!-- Creator     : groff version 1.22.4 -->
+<!-- CreationDate: Tue Feb 19 01:22:23 2019 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -8,9 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <meta name="Content-Style" content="text/css">
 <style type="text/css">
-       p     { margin-top: 0; margin-bottom: 0; }
-       pre   { margin-top: 0; margin-bottom: 0; }
-       table { margin-top: 0; margin-bottom: 0; }
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
 </style>
 <title></title>
 </head>
@@ -19,16 +20,15 @@
 <hr>
 
 
-<p valign="top">NDPROXY(4) FreeBSD Kernel Interfaces Manual
+<p>NDPROXY(4) FreeBSD Kernel Interfaces Manual
 NDPROXY(4)</p>
 
-<p style="margin-top: 1em" valign="top"><b>NAME</b></p>
+<p style="margin-top: 1em"><b>NAME</b></p>
 
 <p style="margin-left:6%;"><b>ndproxy</b> &mdash; Neighbor
 Discovery Proxy</p>
 
-
-<p style="margin-top: 1em" valign="top"><b>SYNOPSIS</b></p>
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
 
 <p style="margin-left:6%;">ndproxy is a kernel module that
 implements IPv6 Neighbor Discovery proxying over
@@ -71,8 +71,7 @@ interface. It is sufficient to add &quot;inet6 -ifdisabled
 -accept_rtadv auto_linklocal&quot; to the
 ifconfig_&lt;interface&gt;_ipv6 variable in rc.conf(5).</p>
 
-<p style="margin-top: 1em" valign="top"><b>DIFFERENCES WITH
-NDP</b></p>
+<p style="margin-top: 1em"><b>DIFFERENCES WITH NDP</b></p>
 
 <p style="margin-left:6%;">The target address to proxy must
 be given when using the ndp(8) command-line tool with the
@@ -90,8 +89,7 @@ redirect packets to another IPv6 internal router, for
 instance a dedicated router with hardware support of IPv6
 routing process.</p>
 
-<p style="margin-top: 1em" valign="top"><b>PREFIX
-SUBNETTING</b></p>
+<p style="margin-top: 1em"><b>PREFIX SUBNETTING</b></p>
 
 <p style="margin-left:6%;">Connecting a flat IPv6 network
 to the Internet is easily done with the RFC-4861 ND
@@ -118,11 +116,10 @@ written for subscribers to ISP that do not support any of
 those mechanisms or protocols, thus not being able to
 natively subnet their IPv6 delegated prefix.</p>
 
-<p style="margin-top: 1em" valign="top"><b>NETWORK
-DESIGN</b></p>
+<p style="margin-top: 1em"><b>NETWORK DESIGN</b></p>
 
 <p style="margin-left:6%;">Here is a generic network design
-using ndproxy to solve such situations: <tt><br>
+using ndproxy to solve such situations: <br>
 ______________________ \ <br>
 / \ \ <br>
 | ISP core network | \ <br>
@@ -148,7 +145,7 @@ subnet1 | | subnet2 | Subscriber <br>
 +---+------+ +----+-----+ | <br>
 |Subscriber| |Subscriber| / <br>
 | host | | host | / <br>
-+----------+ +----------+ /</tt></p>
++----------+ +----------+ /</p>
 
 <p style="margin-left:6%; margin-top: 1em">Note that many
 other use-cases can be handled with ndproxy: the BSD host
@@ -157,8 +154,7 @@ delegated-prefix length can be /64, the PE router can have
 several interfaces on the ISP/Subscriber layer-2 boundary,
 there can be multiple PE routers, etc.</p>
 
-<p style="margin-top: 1em" valign="top"><b>PREFIX
-LENGTH</b></p>
+<p style="margin-top: 1em"><b>PREFIX LENGTH</b></p>
 
 <p style="margin-left:6%;">Even if the IESG and the IAB
 first recommended the allocations of /48 prefixes in the
@@ -184,7 +180,7 @@ be able to communicate with the Internet. Using temporary
 addresses for outbound connections to the Internet must be
 disabled on hosts on those other internal subnets.</p>
 
-<p style="margin-top: 1em" valign="top"><b>IPv6 EXTENSION
+<p style="margin-top: 1em"><b>IPv6 EXTENSION
 HEADERS</b></p>
 
 <p style="margin-left:6%;">For security reasons, ndproxy
@@ -192,35 +188,31 @@ explicitely rejects neighbor solicitation packets containing
 any extension header. Such a packet is mainly
 unattended:</p>
 
-
-<p style="margin-top: 1em" valign="top"><b>Fragmentation:</b></p>
+<p style="margin-top: 1em"><b>Fragmentation:</b></p>
 
 <p style="margin-left:24%; margin-top: 1em">According to
 RFC-6980, IPv6 fragmentation header is forbidden in all
 neighbor discovery messages.</p>
 
-<p style="margin-top: 1em" valign="top"><b>Hop-by-hop
-header:</b></p>
+<p style="margin-top: 1em"><b>Hop-by-hop header:</b></p>
 
 <p style="margin-left:24%; margin-top: 1em">commonly used
 for jumbograms or for MLD. Should not involve neighbor
 solicitation packets.</p>
 
-<p style="margin-top: 1em" valign="top"><b>Destination
-mobility headers:</b></p>
+<p style="margin-top: 1em"><b>Destination mobility
+headers:</b></p>
 
 <p style="margin-left:24%; margin-top: 1em">commonly used
 for mobility, ndproxy does not support these headers.</p>
 
-<p style="margin-top: 1em" valign="top"><b>Routing
-header:</b></p>
+<p style="margin-top: 1em"><b>Routing header:</b></p>
 
 <p style="margin-left:24%; margin-top: 1em">commonly used
 for mobility or source routing, ndproxy does not support
 these headers.</p>
 
-<p style="margin-top: 1em" valign="top"><b>AH &amp; ESP
-headers:</b></p>
+<p style="margin-top: 1em"><b>AH &amp; ESP headers:</b></p>
 
 <p style="margin-left:24%; margin-top: 1em">securing the
 neighbor discovery process is not done with IPsec but with
@@ -228,18 +220,17 @@ the SEcure Neighbor Discovery protocol (RFC-3971). ndproxy
 can not support RFC-3971, since proxifying ND packets is
 some kind of a spoofing process.</p>
 
-<p style="margin-top: 1em" valign="top"><b>EXCEPTION
-ADDRESSES</b></p>
+<p style="margin-top: 1em"><b>EXCEPTION ADDRESSES</b></p>
 
 <p style="margin-left:6%;">Some neigbhor solicitations sent
 on the PE/CPE interconnect must not be proxyfied:</p>
 
-<p style="margin-top: 1em" valign="top">1.</p>
+<p style="margin-top: 1em">1.</p>
 
 <p style="margin-left:13%;">solicitations sent by other
 nodes than the PE;</p>
 
-<p style="margin-top: 1em" valign="top">2.</p>
+<p style="margin-top: 1em">2.</p>
 
 <p style="margin-left:13%;">solicitations sent by the PE to
 reach any on-link address (the address filled in the target
@@ -262,7 +253,7 @@ maintain this list correctly could lead to badly redirect
 some packets to the CPE, but with a simple network design,
 this list can be let empty.</p>
 
-<p style="margin-top: 1em" valign="top"><b>UPLINK ROUTER
+<p style="margin-top: 1em"><b>UPLINK ROUTER
 ADDRESSES</b></p>
 
 <p style="margin-left:6%;">ndproxy only handles packets
@@ -274,16 +265,16 @@ the process or depending on other external constraints.</p>
 <p style="margin-left:6%; margin-top: 1em">Here are some
 cases when it can occur:</p>
 
-<p style="margin-top: 1em" valign="top">1.</p>
+<p style="margin-top: 1em">1.</p>
 
 <p style="margin-left:13%;">The PE may have multiple
 interfaces;</p>
 
-<p style="margin-top: 1em" valign="top">2.</p>
+<p style="margin-top: 1em">2.</p>
 
 <p style="margin-left:13%;">There may be multiple PE;</p>
 
-<p style="margin-top: 1em" valign="top">3.</p>
+<p style="margin-top: 1em">3.</p>
 
 <p style="margin-left:13%;">Many routers choose to use a
 link-local address when sending neighbor solicitations, but
@@ -297,7 +288,7 @@ Therefore, the source address of the Neighbor Solicitation
 packet should also be selected in the same global scope,
 according to RFC-4861;</p>
 
-<p style="margin-top: 1em" valign="top">4.</p>
+<p style="margin-top: 1em">4.</p>
 
 <p style="margin-left:13%;">When the uplink router does not
 yet know its own address, it must use the unspecified
@@ -336,8 +327,7 @@ PE link-local address, IPv6 connectivity should be correctly
 established between the Internet and the internal
 subscriber&rsquo;s subnets.</p>
 
-
-<p style="margin-top: 1em" valign="top"><b>CONFIGURATION</b></p>
+<p style="margin-top: 1em"><b>CONFIGURATION</b></p>
 
 <p style="margin-left:6%;">An IPv6 address can be any valid
 textual representation according to RFC-4291 and RFC-5952
@@ -368,7 +358,7 @@ placing the following line in loader.conf(5):</p>
 <p style="margin-left:14%; margin-top: 1em">ndproxy_load=&quot;YES&quot;</p>
 
 
-<p style="margin-top: 1em" valign="top"><b>net.inet6.ndproxyconf_uplink_interface
+<p style="margin-top: 1em"><b>net.inet6.ndproxyconf_uplink_interface
 sysctl entry or ndproxy_uplink_interface rc.conf
 variable:</b></p>
 
@@ -380,7 +370,7 @@ connecting the PE and CPE routers.</p>
 &quot;vlan2&quot;.</p>
 
 
-<p style="margin-top: 1em" valign="top"><b>net.inet6.ndproxyconf_downlink_mac_address
+<p style="margin-top: 1em"><b>net.inet6.ndproxyconf_downlink_mac_address
 sysctl entry or ndproxy_downlink_mac_address rc.conf
 variable:</b></p>
 
@@ -395,7 +385,7 @@ separated by colons.</p>
 &quot;00:0C:29:B6:43:D5&quot;.</p>
 
 
-<p style="margin-top: 1em" valign="top"><b>net.inet6.ndproxyconf_exception_ipv6_addresses
+<p style="margin-top: 1em"><b>net.inet6.ndproxyconf_exception_ipv6_addresses
 sysctl entry or ndproxy_exception_ipv6_addresses rc.conf
 variable:</b></p>
 
@@ -408,7 +398,7 @@ ADDRESSES&quot;.</p>
 &quot;fe80::20d:edff:fe7b:68b7;fe80::222:15ff:fe3b:59a&quot;.</p>
 
 
-<p style="margin-top: 1em" valign="top"><b>net.inet6.ndproxyconf_uplink_ipv6_addresses
+<p style="margin-top: 1em"><b>net.inet6.ndproxyconf_uplink_ipv6_addresses
 sysctl entry or ndproxy_uplink_ipv6_addresses rc.conf
 variable:</b></p>
 
@@ -420,27 +410,26 @@ ADDRESSES&quot;.</p>
 <p style="margin-left:24%; margin-top: 1em">Example:
 &quot;fe80::207:cbff:fe4b:2d20;2a01:e35:8aae:bc60::1;::&quot;.</p>
 
-
-<p style="margin-top: 1em" valign="top"><b>net.inet6.ndproxycount
-sysctl entry:</b></p>
+<p style="margin-top: 1em"><b>net.inet6.ndproxycount sysctl
+entry:</b></p>
 
 <p style="margin-left:24%; margin-top: 1em">Number of
 advertisements sent.</p>
 
-<p style="margin-top: 1em" valign="top"><b>SEE ALSO</b></p>
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
 
 <p style="margin-left:6%;">inet6(4), rc.conf(5),
 loader.conf(5), sysctl.conf(5), sysctl(8), loader(8),
 pfil(9)</p>
 
-<p style="margin-top: 1em" valign="top"><b>AUTHOR</b></p>
+<p style="margin-top: 1em"><b>AUTHOR</b></p>
 
 <p style="margin-left:6%;">Alexandre Fenyo
 &lt;alex@fenyo.net&gt; - www.fenyo.net</p>
 
 
-<p style="margin-left:6%; margin-top: 1em">FreeBSD&nbsp;10.3
-May&nbsp;27, 2017 FreeBSD&nbsp;10.3</p>
+<p style="margin-left:6%; margin-top: 1em">FreeBSD&nbsp;13.0
+May&nbsp;27, 2017 FreeBSD&nbsp;13.0</p>
 <hr>
 </body>
 </html>

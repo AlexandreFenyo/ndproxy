@@ -8,10 +8,10 @@ SYNOPSIS
      ing over Ethernet-like access networks, with many options to handle sev-
      eral use-cases.
 
-     ndproxy replies to a neighbor solicitation with a specific neighbor
-     advertisement, in order to let the PE uplink router send further packets
-     to a CPE downlink router, that may or may not be the same node that run
-     ndproxy.
+     ndproxy replies to a neighbor solicitation with a specific neighbor ad-
+     vertisement, in order to let the PE uplink router send further packets to
+     a CPE downlink router, that may or may not be the same node that run nd-
+     proxy.
 
      The hook-based pfil(9) framework is used to let ndproxy be invoked for
      every IPv6 incoming packet, in order to specifically handle and filter
@@ -33,14 +33,14 @@ SYNOPSIS
      The interface on which ndproxy listen to solicitations only need to be
      assigned a link-local address. No information about the delegated prefix
      and no global address are needed on this interface. It is sufficient to
-     add "inet6 -ifdisabled -accept_rtadv auto_linklocal" to the ifcon-
-     fig_<interface>_ipv6 variable in rc.conf(5).
+     add "inet6 -ifdisabled -accept_rtadv auto_linklocal" to the ifconfig_<in-
+     terface>_ipv6 variable in rc.conf(5).
 
 DIFFERENCES WITH NDP
      The target address to proxy must be given when using the ndp(8) command-
      line tool with the proxy option. On the contrary, ndproxy does not rely
-     on a list of target addresses to proxy. Thus, RFC-4941 temporary
-     addresses can be proxyfied. For security reasons, many operating systems
+     on a list of target addresses to proxy. Thus, RFC-4941 temporary ad-
+     dresses can be proxyfied. For security reasons, many operating systems
      use a temporary address when establishing outbound connections.
 
      When using ndp(8) command-line tool with the proxy option, the proxyfied
@@ -108,21 +108,21 @@ PREFIX LENGTH
      Even if the IESG and the IAB first recommended the allocations of /48
      prefixes in the general case, for the boundary between the public and the
      private topology (see RFC-3177), and that some Regional Internet Reg-
-     istries (APNIC, ARIN and RIPE) have subsequently revised the end site
-     assignment policy to encourage the assignment of /56 blocks to end sites,
+     istries (APNIC, ARIN and RIPE) have subsequently revised the end site as-
+     signment policy to encourage the assignment of /56 blocks to end sites,
      and that RFC-6177 finally recommended giving home sites significantly
      more than a single /64, in order for home sites to be given multiple sub-
      nets, some ISP currently only delegate /64 prefixes.
 
      In such a case, the subscriber should subnet a RFC-4193 Unique Local IPv6
-     Unicast Addresses prefix to the internal subnetworks, for internal-to-
-     internal communications. The /64 global prefix should be routed to the
-     only internal subnet in which RFC-4941 temporary addresses are used by
-     hosts when establishing outbound connections. Static routes on the CPE
-     router should be set to let hosts on other internal subnets be able to
-     communicate with the Internet. Using temporary addresses for outbound
-     connections to the Internet must be disabled on hosts on those other
-     internal subnets.
+     Unicast Addresses prefix to the internal subnetworks, for internal-to-in-
+     ternal communications. The /64 global prefix should be routed to the only
+     internal subnet in which RFC-4941 temporary addresses are used by hosts
+     when establishing outbound connections. Static routes on the CPE router
+     should be set to let hosts on other internal subnets be able to communi-
+     cate with the Internet. Using temporary addresses for outbound connec-
+     tions to the Internet must be disabled on hosts on those other internal
+     subnets.
 
 IPv6 EXTENSION HEADERS
      For security reasons, ndproxy explicitely rejects neighbor solicitation
@@ -162,13 +162,13 @@ EXCEPTION ADDRESSES
 
      1.   solicitations sent by other nodes than the PE;
 
-     2.   solicitations sent by the PE to reach any on-link address (the
-          address filled in the target address option) owned by nodes attached
-          to the PE/CPE interconnect, for instance to reach the CPE, the
-          ndproxy host or other hosts attached to this layer-2 interconnect.
+     2.   solicitations sent by the PE to reach any on-link address (the ad-
+          dress filled in the target address option) owned by nodes attached
+          to the PE/CPE interconnect, for instance to reach the CPE, the nd-
+          proxy host or other hosts attached to this layer-2 interconnect.
 
-     The target addresses filled in those solicitations that ndproxy must
-     ignore have to be declared via sysctl (net.inet6.ndproxyconf_excep-
+     The target addresses filled in those solicitations that ndproxy must ig-
+     nore have to be declared via sysctl (net.inet6.ndproxyconf_excep-
      tion_ipv6_addresses). This list must contain the link-local and global-
      scoped unicast and anycast addresses of the CPE, of the ndproxy host and
      of any other host than the PE attached to the PE/CPE interconnect.
@@ -194,10 +194,10 @@ UPLINK ROUTER ADDRESSES
           having a global address assigned on the same link, tries to send
           packets (echo request, for instance) to an on-link destination
           global address, the source address of the echo request packet
-          prompting the solicitation may be global-scoped according to the
-          selection algorithm described in RFC-6724. Therefore, the source
-          address of the Neighbor Solicitation packet should also be selected
-          in the same global scope, according to RFC-4861;
+          prompting the solicitation may be global-scoped according to the se-
+          lection algorithm described in RFC-6724. Therefore, the source ad-
+          dress of the Neighbor Solicitation packet should also be selected in
+          the same global scope, according to RFC-4861;
 
      4.   When the uplink router does not yet know its own address, it must
           use the unspecified address, according to RFC-4861.
@@ -205,19 +205,19 @@ UPLINK ROUTER ADDRESSES
      So, it can not be assumed that an uplink router will always use the same
      IPv6 address to send neighbor solicitations. Each assigned address that
      can be used as a source address by the PE on its downlink interface must
-     then be declared to ndproxy via sysctl (net.inet6.ndproxy-
-     conf_uplink_ipv6_addresses).
+     then be declared to ndproxy via sysctl (net.inet6.ndproxyconf_up-
+     link_ipv6_addresses).
 
      ndproxy will only handle packets that come from one of these addresses.
 
      A special care must be taken about the unsolicited address. It may be
      used by the PE, then it is part of the list of PE addresses and should
      therefore be added to the list of PE addresses. Since this address can
-     also be used by other nodes during some initialization steps (for
-     instance when hot-swapping an Ethernet board), another node could use
-     this address to send neighbor solicitations that ndproxy should not han-
-     dle, because they are not sent by the PE. In fact, this is not a problem
-     because the target address option contained in a solicitation from this
+     also be used by other nodes during some initialization steps (for in-
+     stance when hot-swapping an Ethernet board), another node could use this
+     address to send neighbor solicitations that ndproxy should not handle,
+     because they are not sent by the PE. In fact, this is not a problem be-
+     cause the target address option contained in a solicitation from this
      other node should be in the exception list. So, adding the unsolicited
      address in the PE addresses list should be safe.
 
@@ -273,8 +273,8 @@ CONFIGURATION
                    ndproxy_exception_ipv6_addresses rc.conf variable:
 
                    Target addresses not to proxy. In a simple network design,
-                   this list can be let empty. See section "EXCEPTION
-                   ADDRESSES".
+                   this list can be let empty. See section "EXCEPTION AD-
+                   DRESSES".
 
                    Example:
                    "fe80::20d:edff:fe7b:68b7;fe80::222:15ff:fe3b:59a".
@@ -283,8 +283,8 @@ CONFIGURATION
                    ndproxy_uplink_ipv6_addresses rc.conf variable:
 
                    Addresses of the PE. This list should at least contain the
-                   PE link-local address. See section "UPLINK ROUTER
-                   ADDRESSES".
+                   PE link-local address. See section "UPLINK ROUTER AD-
+                   DRESSES".
 
                    Example:
                    "fe80::207:cbff:fe4b:2d20;2a01:e35:8aae:bc60::1;::".
@@ -300,4 +300,4 @@ SEE ALSO
 AUTHOR
      Alexandre Fenyo <alex@fenyo.net> - www.fenyo.net
 
-FreeBSD 10.3                     May 27, 2017                     FreeBSD 10.3
+FreeBSD 13.0                     May 27, 2017                     FreeBSD 13.0

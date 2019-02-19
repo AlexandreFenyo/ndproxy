@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	ndproxy
-PORTVERSION=	3.0.beta
+PORTVERSION=	3.1
 CATEGORIES=	net
 
 MAINTAINER=	fbsd.bugzilla@fenyo.net
@@ -12,14 +12,17 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 SUB_FILES=	pkg-message
 
+USES=		kmod
+
 USE_RC_SUBR=	ndproxy
 USE_GITHUB=	yes
 GH_ACCOUNT=	AlexandreFenyo
 GH_TAGNAME=	v${PORTVERSION}
 
-PLIST_FILES=	${KMODDIR}/${PORTNAME}.ko man/man4/${PORTNAME}.4.gz
+# build for a kernel with 'options VIMAGE'
+CFLAGS+=	-DVIMAGE
 
-USES=		kmod
+PLIST_FILES=	${KMODDIR}/${PORTNAME}.ko man/man4/${PORTNAME}.4.gz
 
 pre-build:
 	(cd ${BUILD_WRKSRC}; ${MAKE} depend)
