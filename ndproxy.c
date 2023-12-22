@@ -66,7 +66,11 @@ static void register_hook() {
   pha.pa_modname = "ndproxy";
   pha.pa_ruleset = NULL;
   pha.pa_rulname = "default-in6";
+#if PFIL_VERSION > 1
+  pha.pa_mbuf_chk = packet;
+#else
   pha.pa_func = packet;
+#endif
   pfh_hook = pfil_add_hook(&pha);
 
   pla.pa_version = PFIL_VERSION;
