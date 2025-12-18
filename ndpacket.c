@@ -183,7 +183,7 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
   // create a new mbuf to send a neighbor advertisement
   // ICMPv6 options are rounded up to 8 bytes alignment
   maxlen = (sizeof(struct ip6_hdr) + sizeof(struct nd_neighbor_advert) +
-	    sizeof(struct nd_opt_hdr) + packet_ifnet->if_addrlen + 7) & ~7;
+	    sizeof(struct nd_opt_hdr) + if_getaddrlen(packet_ifnet) + 7) & ~7;
   if (max_linkhdr + maxlen > MCLBYTES) {
     printf("NDPROXY ERROR: reply length > MCLBYTES\n");
     return 0;
@@ -203,7 +203,7 @@ int packet(void *packet_arg, struct mbuf **packet_mp, struct ifnet *packet_ifnet
   // packet content:
   // IPv6 header + ICMPv6 Neighbor Advertisement including target address + target link-layer ICMPv6 address option
   mreply->m_pkthdr.len = mreply->m_len = (sizeof(struct ip6_hdr) + sizeof(struct nd_neighbor_advert)
-					  + sizeof(struct nd_opt_hdr) + packet_ifnet->if_addrlen + 7) & ~7;
+					  + sizeof(struct nd_opt_hdr) + if_getaddrlen(packet_ifnet) + 7) & ~7;
 
   // reserve space for the link-layer header
   mreply->m_data += max_linkhdr;
