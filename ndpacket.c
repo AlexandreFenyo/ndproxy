@@ -59,6 +59,12 @@
 
 // called by pfil_run_hooks() @ ip6_input.c:ip_input()
 
+#if __FreeBSD_version < 1400000
+static uint8_t if_getaddrlen(if_t ifp) {
+	return (ifp->if_addrlen);
+}
+#endif
+
 #ifdef PFIL_VERSION
 pfil_return_t packet(struct mbuf **packet_mp, struct ifnet *packet_ifnet,
                      const int packet_dir, void *packet_arg, struct inpcb *packet_inpcb) {
